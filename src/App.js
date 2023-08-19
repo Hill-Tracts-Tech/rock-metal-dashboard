@@ -19,13 +19,11 @@ import { useSelector } from "react-redux";
 
 function App() {
   const admin = useSelector((state) => state.user?.currentUser?.isAdmin);
+  console.log(admin);
   return (
     <Router>
       <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
-        {admin && (
+        {admin ? (
           <>
             <Topbar />
             <div className="container">
@@ -53,6 +51,8 @@ function App() {
               </Route>
             </div>
           </>
+        ) : (
+          <Login />
         )}
       </Switch>
     </Router>

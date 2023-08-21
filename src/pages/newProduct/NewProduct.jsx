@@ -14,6 +14,8 @@ export default function NewProduct() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState([]);
+  const [sizes, setSizes] = useState([]);
+  const [colors, setColors] = useState([]);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -21,8 +23,24 @@ export default function NewProduct() {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
+
   const handleCat = (e) => {
     setCat(e.target.value.split(","));
+  };
+
+  const handleSizes = (e) => {
+    setSizes(e.target.value.split(","));
+  };
+
+  const handleColors = (e) => {
+    setColors(e.target.value.split(","));
+  };
+
+  const product = {
+    ...inputs,
+    categories: cat,
+    size: sizes,
+    color: colors,
   };
 
   const handleClick = (e) => {
@@ -61,7 +79,13 @@ export default function NewProduct() {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          const product = { ...inputs, img: downloadURL, categories: cat };
+          const product = {
+            ...inputs,
+            img: downloadURL,
+            categories: cat,
+            size: sizes,
+            color: colors,
+          };
           addProduct(product, dispatch);
         });
       }
@@ -112,10 +136,36 @@ export default function NewProduct() {
           <input type="text" placeholder="jeans,skirts" onChange={handleCat} />
         </div>
         <div className="addProductItem">
+          <label>Sizes</label>
+          <input
+            type="text"
+            placeholder="jeans,skirts"
+            onChange={handleSizes}
+          />
+        </div>
+        <div className="addProductItem">
+          <label>Colors</label>
+          <input type="text" placeholder="red,green" onChange={handleColors} />
+        </div>
+        <div className="addProductItem">
           <label>Stock</label>
           <select name="inStock" onChange={handleChange}>
-            <option value="true">Yes</option>
             <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
+        <div className="addProductItem">
+          <label>Featured</label>
+          <select name="isFeatured" onChange={handleChange}>
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
+        <div className="addProductItem">
+          <label>Trending</label>
+          <select name="isTreding" onChange={handleChange}>
+            <option value="false">No</option>
+            <option value="true">Yes</option>
           </select>
         </div>
         <button onClick={handleClick} className="addProductButton">

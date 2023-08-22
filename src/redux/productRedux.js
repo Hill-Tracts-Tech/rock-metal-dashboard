@@ -28,10 +28,10 @@ export const productSlice = createSlice({
     },
     deleteProductSuccess: (state, action) => {
       state.isFetching = false;
-      state.products.splice(
-        state.products.findIndex((item) => item._id === action.payload),
-        1
+      const updatedProducts = state.products.filter(
+        (item) => item._id !== action.payload
       );
+      state.products = updatedProducts;
     },
     deleteProductFailure: (state) => {
       state.isFetching = false;

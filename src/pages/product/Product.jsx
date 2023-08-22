@@ -38,9 +38,9 @@ export default function Product() {
     const getStats = async () => {
       try {
         const res = await userRequest.get("orders/income?pid=" + productId);
-        const list = res.data.sort((a,b)=>{
-            return a._id - b._id
-        })
+        const list = res.data.sort((a, b) => {
+          return a._id - b._id;
+        });
         list.map((item) =>
           setPStats((prev) => [
             ...prev,
@@ -90,17 +90,88 @@ export default function Product() {
       <div className="productBottom">
         <form className="productForm">
           <div className="productFormLeft">
-            <label>Product Name</label>
-            <input type="text" placeholder={product.title} />
-            <label>Product Description</label>
-            <input type="text" placeholder={product.desc} />
-            <label>Price</label>
-            <input type="text" placeholder={product.price} />
-            <label>In Stock</label>
-            <select name="inStock" id="idStock">
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
+            <div className="addProductItem"></div>
+            <div className="addProductItem">
+              <label>Title</label>
+              <input
+                name="title"
+                type="text"
+                placeholder="Apple Airpods"
+                // onChange={handleChange}
+              />
+            </div>
+            <div className="addProductItem">
+              <label>Description</label>
+              <input
+                name="desc"
+                type="text"
+                placeholder="description..."
+                // onChange={handleChange}
+              />
+            </div>
+            <div className="addProductItem">
+              <label>Price</label>
+              <input
+                name="price"
+                type="number"
+                placeholder="100"
+                // onChange={handleChange}
+              />
+            </div>
+            <div className="addProductItem">
+              <label>Categories</label>
+              <input
+                type="text"
+                placeholder="jeans,skirts"
+                // onChange={handleCat}
+              />
+            </div>
+            <div className="addProductItem">
+              <label>Sizes</label>
+              <input
+                type="text"
+                placeholder="jeans,skirts"
+                // onChange={handleSizes}
+              />
+            </div>
+            <div className="addProductItem">
+              <label>Colors</label>
+              <input
+                type="text"
+                placeholder="red,green"
+                // onChange={handleColors}
+              />
+            </div>
+            <div className="addProductItem">
+              <label>Stock</label>
+              <select
+                name="inStock"
+                // onChange={handleChange}
+              >
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+            </div>
+            <div className="addProductItem">
+              <label>Featured</label>
+              <select
+                name="isFeatured"
+                //  onChange={handleChange}
+              >
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+            </div>
+            <div className="addProductItem">
+              <label>Trending</label>
+              <select
+                name="isTreding"
+                // onChange={handleChange}
+              >
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+            </div>
           </div>
           <div className="productFormRight">
             <div className="productUpload">

@@ -19,9 +19,11 @@ export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
     const res = await publicRequest.post("/auth/login", user);
-    dispatch(loginSuccess(res.data));
+    dispatch(loginSuccess(res.data.data));
+    alert("Loggedin Successfully");
   } catch (err) {
-    dispatch(loginFailure());
+    const errorMessage = err.response?.data?.error || "An error occurred.";
+    dispatch(loginFailure(errorMessage));
   }
 };
 

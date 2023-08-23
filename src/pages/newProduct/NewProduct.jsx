@@ -101,6 +101,7 @@ export default function NewProduct() {
           <input
             type="file"
             id="file"
+            autoComplete=""
             onChange={(e) => setFile(e.target.files[0])}
           />
         </div>
@@ -129,6 +130,9 @@ export default function NewProduct() {
             type="number"
             placeholder="100"
             onChange={handleChange}
+            className="price-input"
+            pattern="^\d+(\.\d{1,2})?$"
+            required
           />
         </div>
         <div className="addProductItem">
@@ -168,10 +172,10 @@ export default function NewProduct() {
             <option value="true">Yes</option>
           </select>
         </div>
-        <button onClick={handleClick} className="addProductButton">
-          Create
-        </button>
       </form>
+      <button type="submit" onClick={handleClick} className="addProductButton">
+        Add Product
+      </button>
     </div>
   );
 }

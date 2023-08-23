@@ -1,14 +1,40 @@
-.newProduct {
+/* .newProduct {
   flex: 4;
   margin-left: 100px;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+} */
+.newProduct {
+  width: 80%; 
+  overflow-x: auto;
+  white-space: nowrap;
+  margin: 0 auto;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  padding: 20px;
 }
 
+@media (max-width: 768px) {
+  .newProduct {
+    width: 100%;
+  }
+}
 .addProductForm {
   margin-top: 10px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+@media screen and (max-width:768px) {
+  .addProductForm{
+    grid-template-columns: auto;
+  }
 }
 
 .addProductItem {
-  width: 250px;
+  width: 80%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
@@ -19,22 +45,45 @@
   font-weight: 600;
   margin-bottom: 10px;
 }
-
-.addProductItem > input {
-  padding: 10px;
+.addProductItem input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+.addProductItem select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.addProductItem > select {
+input {
+  border: 1px solid teal;
   padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
 }
-
+.price-input::-webkit-inner-spin-button,
+.price-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+.price-input:invalid {
+  border-color: #dc3545;
+}
+.price-input:valid {
+  border-color: #28a745;
+}
 .addProductButton {
   margin-top: 10px;
-  padding: 7px 10px;
+  margin-bottom: 10px;
+  padding: 10px 18px;
   border: none;
   border-radius: 10px;
-  background-color: darkblue;
+  border: 1.5px solid teal;
+  background-color: teal;
   color: white;
-  font-weight: 600;
+  font-weight: bold;
   cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+
 }

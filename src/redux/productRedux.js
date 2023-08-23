@@ -5,26 +5,26 @@ export const productSlice = createSlice({
   initialState: {
     products: [],
     isLoading: false,
-    error: false,
+    error: "",
   },
   reducers: {
     //GET ALL
     getProductStart: (state) => {
       state.isLoading = true;
-      state.error = false;
+      state.error = "";
     },
     getProductSuccess: (state, action) => {
       state.isLoading = false;
       state.products = action.payload;
     },
-    getProductFailure: (state) => {
+    getProductFailure: (state, action) => {
       state.isLoading = false;
-      state.error = true;
+      state.error = action.payload;
     },
     //DELETE
     deleteProductStart: (state) => {
       state.isLoading = true;
-      state.error = false;
+      state.error = "";
     },
     deleteProductSuccess: (state, action) => {
       state.isLoading = false;
@@ -33,14 +33,14 @@ export const productSlice = createSlice({
       );
       state.products = updatedProducts;
     },
-    deleteProductFailure: (state) => {
+    deleteProductFailure: (state, action) => {
       state.isLoading = false;
-      state.error = true;
+      state.error = action.payload;
     },
     //UPDATE
     updateProductStart: (state) => {
       state.isLoading = true;
-      state.error = false;
+      state.error = "";
     },
     updateProductSuccess: (state, action) => {
       state.isLoading = false;
@@ -48,22 +48,22 @@ export const productSlice = createSlice({
         state.products.findIndex((item) => item._id === action.payload.id)
       ] = action.payload.product;
     },
-    updateProductFailure: (state) => {
+    updateProductFailure: (state, action) => {
       state.isLoading = false;
-      state.error = true;
+      state.error = action.payload;
     },
     //UPDATE
     addProductStart: (state) => {
       state.isLoading = true;
-      state.error = false;
+      state.error = "";
     },
     addProductSuccess: (state, action) => {
       state.isLoading = false;
       state.products.push(action.payload);
     },
-    addProductFailure: (state) => {
+    addProductFailure: (state, action) => {
       state.isLoading = false;
-      state.error = true;
+      state.error = action.payload;
     },
   },
 });

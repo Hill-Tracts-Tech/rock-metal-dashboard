@@ -31,9 +31,10 @@ export const getProducts = async (dispatch) => {
   dispatch(getProductStart());
   try {
     const res = await publicRequest.get("/products");
-    dispatch(getProductSuccess(res.data));
+    dispatch(getProductSuccess(res.data.data));
   } catch (err) {
-    dispatch(getProductFailure());
+    const errorMessage = err.response?.data?.error || "An error occurred.";
+    dispatch(getProductFailure(errorMessage));
   }
 };
 
@@ -43,7 +44,8 @@ export const deleteProduct = async (id, dispatch) => {
     await userRequest.delete(`/products/${id}`);
     dispatch(deleteProductSuccess(id));
   } catch (err) {
-    dispatch(deleteProductFailure());
+    const errorMessage = err.response?.data?.error || "An error occurred.";
+    dispatch(deleteProductFailure(errorMessage));
   }
 };
 
@@ -53,15 +55,17 @@ export const updateProduct = async (id, product, dispatch) => {
     // update
     dispatch(updateProductSuccess({ id, product }));
   } catch (err) {
-    dispatch(updateProductFailure());
+    const errorMessage = err.response?.data?.error || "An error occurred.";
+    dispatch(updateProductFailure(errorMessage));
   }
 };
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart());
   try {
     const res = await userRequest.post(`/products`, product);
-    dispatch(addProductSuccess(res.data));
+    dispatch(addProductSuccess(res.data.data));
   } catch (err) {
-    dispatch(addProductFailure());
+    const errorMessage = err.response?.data?.error || "An error occurred.";
+    dispatch(addProductFailure(errorMessage));
   }
 };

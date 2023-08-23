@@ -90,13 +90,12 @@ export default function Product() {
       <div className="productBottom">
         <form className="productForm">
           <div className="productFormLeft">
-            <div className="addProductItem"></div>
             <div className="addProductItem">
               <label>Title</label>
               <input
                 name="title"
                 type="text"
-                placeholder="Apple Airpods"
+                placeholder="Products name"
                 // onChange={handleChange}
               />
             </div>
@@ -115,6 +114,9 @@ export default function Product() {
                 name="price"
                 type="number"
                 placeholder="100"
+                className="price-input"
+                pattern="^\d+(\.\d{1,2})?$"
+                required
                 // onChange={handleChange}
               />
             </div>
@@ -173,6 +175,7 @@ export default function Product() {
               </select>
             </div>
           </div>
+
           <div className="productFormRight">
             <div className="productUpload">
               <img src={product.img} alt="" className="productUploadImg" />

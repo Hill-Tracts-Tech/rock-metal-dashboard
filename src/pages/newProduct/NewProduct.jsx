@@ -73,7 +73,6 @@ export default function NewProduct() {
         }
       },
       (error) => {
-        // Handle unsuccessful uploads
         console.log(error);
       },
       () => {
@@ -144,7 +143,7 @@ export default function NewProduct() {
           <label>Sizes</label>
           <input
             type="text"
-            placeholder="jeans,skirts"
+            placeholder="M,L,XL,XXL"
             onChange={handleSizes}
           />
         </div>
@@ -173,10 +172,14 @@ export default function NewProduct() {
             <option value="true">Yes</option>
           </select>
         </div>
+        <button
+          type="submit"
+          onClick={handleClick}
+          className="addProductButton"
+        >
+          Add Product
+        </button>
       </form>
-      <button type="submit" onClick={handleClick} className="addProductButton">
-        Add Product
-      </button>
     </div>
   );
 }

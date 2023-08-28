@@ -42,17 +42,22 @@ export const productSlice = createSlice({
       state.isLoading = true;
       state.error = "";
     },
+
     updateProductSuccess: (state, action) => {
       state.isLoading = false;
-      state.products[
-        state.products.findIndex((item) => item._id === action.payload.id)
-      ] = action.payload.product;
+      const updatedProductIndex = state.products.findIndex(
+        (item) => item._id === action.payload.id
+      );
+      if (updatedProductIndex !== -1) {
+        state.products[updatedProductIndex] = action.payload.updatedProduct;
+      }
     },
+
     updateProductFailure: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
-    //UPDATE
+    //New Add
     addProductStart: (state) => {
       state.isLoading = true;
       state.error = "";

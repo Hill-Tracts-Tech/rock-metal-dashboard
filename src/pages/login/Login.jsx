@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/apiCalls";
-import "../login/Login.css";
-import profile from "../../assets/profile.png"
+import "./Login.css";
+import profile from "../../assets/profile.png";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,10 +13,12 @@ const Login = () => {
     login(dispatch, { email, password });
   };
   return (
-    <div className="container">
-      <div className="wrapper">
+    <div className="l-container">
+      <div className="l-wrapper">
         <h1>Welcome to</h1>
-        <div className="profile"><img src={profile} alt="" /></div>
+        <div className="l-profile">
+          <img src={profile} alt="" />
+        </div>
         <span>Maliker name</span>
         <input
           style={{ padding: 10, marginBottom: 20 }}
@@ -30,7 +32,7 @@ const Login = () => {
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div className="btn">
+        <div className="l-btn">
           <button onClick={handleClick} style={{ padding: 10, width: 100 }}>
             Login
           </button>

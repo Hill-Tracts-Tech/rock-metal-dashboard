@@ -1,20 +1,22 @@
 import { Link, useLocation } from "react-router-dom";
 import "./product.css";
 import Chart from "../../components/chart/Chart";
-import { productData } from "../../dummyData";
 import { Publish } from "@material-ui/icons";
-import { useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
+import { updateProduct } from "../../redux/apiCalls";
+import { useDispatch } from "react-redux";
 
 export default function Product() {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
   const [pStats, setPStats] = useState([]);
-
-  const product = useSelector((state) =>
-    state.product.products.find((product) => product._id === productId)
-  );
+  const [product, setProduct] = useState({});
+  const [file, setFile] = useState(null);
+  const [cat, setCat] = useState([]);
+  const [sizes, setSizes] = useState([]);
+  const [colors, setColors] = useState([]);
+  const dispatch = useDispatch();
 
   const MONTHS = useMemo(
     () => [
@@ -33,7 +35,19 @@ export default function Product() {
     ],
     []
   );
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await userRequest.get(`/products/find/${productId}`);
+        setProduct(res.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProduct();
+  }, [productId]);
 
+  console.log(product);
   useEffect(() => {
     const getStats = async () => {
       try {
@@ -54,13 +68,42 @@ export default function Product() {
     getStats();
   }, [productId, MONTHS]);
 
+  const [updateInput, setUpdate] = useState({});
+
+  // update product
+  const handleChange = (e) => {
+    setUpdate((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleCat = (e) => {
+    setCat(e.target.value.split(","));
+  };
+
+  const handleSizes = (e) => {
+    setSizes(e.target.value.split(","));
+  };
+
+  const handleColors = (e) => {
+    setColors(e.target.value.split(","));
+  };
+
+  const updatedProduct = {
+    ...updateInput,
+    categories: cat,
+    size: sizes,
+    color: colors,
+  };
+  console.log(updatedProduct);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateProduct(updatedProduct, dispatch); // Call the updateProduct function with updatedProduct data
+  };
   return (
     <div className="product">
       <div className="productTitleContainer">
-        <h1 className="productTitle">Product</h1>
-        <Link to="/newproduct">
-          <button className="productAddButton">Create</button>
-        </Link>
+        <h1 className="productTitle">Update: {product.title}</h1>
       </div>
       <div className="productTop">
         <div className="productTopLeft">
@@ -88,7 +131,7 @@ export default function Product() {
         </div>
       </div>
       <div className="productBottom">
-        <form className="productForm">
+        <form onSubmit={handleSubmit} className="productForm">
           <div className="productFormLeft">
             <div className="addProductItem">
               <label>Title</label>
@@ -96,7 +139,8 @@ export default function Product() {
                 name="title"
                 type="text"
                 placeholder="Products name"
-                // onChange={handleChange}
+                defaultValue={product.title}
+                onChange={handleChange}
               />
             </div>
             <div className="addProductItem">
@@ -105,7 +149,8 @@ export default function Product() {
                 name="desc"
                 type="text"
                 placeholder="description..."
-                // onChange={handleChange}
+                defaultValue={product.desc}
+                onChange={handleChange}
               />
             </div>
             <div className="addProductItem">
@@ -116,8 +161,9 @@ export default function Product() {
                 placeholder="100"
                 className="price-input"
                 pattern="^\d+(\.\d{1,2})?$"
+                defaultValue={product.price}
                 required
-                // onChange={handleChange}
+                onChange={handleChange}
               />
             </div>
             <div className="addProductItem">
@@ -125,7 +171,8 @@ export default function Product() {
               <input
                 type="text"
                 placeholder="jeans,skirts"
-                // onChange={handleCat}
+                defaultValue={product.categories}
+                onChange={handleCat}
               />
             </div>
             <div className="addProductItem">
@@ -133,7 +180,8 @@ export default function Product() {
               <input
                 type="text"
                 placeholder="jeans,skirts"
-                // onChange={handleSizes}
+                defaultValue={product.size}
+                onChange={handleSizes}
               />
             </div>
             <div className="addProductItem">
@@ -141,37 +189,35 @@ export default function Product() {
               <input
                 type="text"
                 placeholder="red,green"
-                // onChange={handleColors}
+                defaultValue={product.color}
+                onChange={handleColors}
               />
             </div>
             <div className="addProductItem">
               <label>Stock</label>
-              <select
-                name="inStock"
-                // onChange={handleChange}
-              >
+              <select name="inStock" onChange={handleChange}>
+                <option defaultValue={true} value="true">
+                  Yes
+                </option>
                 <option value="false">No</option>
-                <option value="true">Yes</option>
               </select>
             </div>
             <div className="addProductItem">
               <label>Featured</label>
-              <select
-                name="isFeatured"
-                //  onChange={handleChange}
-              >
+              <select name="isFeatured" onChange={handleChange}>
+                <option defaultChecked value="true">
+                  Yes
+                </option>
                 <option value="false">No</option>
-                <option value="true">Yes</option>
               </select>
             </div>
             <div className="addProductItem">
               <label>Trending</label>
-              <select
-                name="isTreding"
-                // onChange={handleChange}
-              >
+              <select name="isTreding" onChange={handleChange}>
+                <option defaultChecked value="true">
+                  Yes
+                </option>
                 <option value="false">No</option>
-                <option value="true">Yes</option>
               </select>
             </div>
           </div>
@@ -182,9 +228,21 @@ export default function Product() {
               <label for="file">
                 <Publish />
               </label>
-              <input type="file" id="file" style={{ display: "none" }} />
+              <input
+                defaultValue={product.img}
+                onChange={(e) => setFile(e.target.files[0])}
+                type="file"
+                id="file"
+                style={{ display: "none" }}
+              />
             </div>
-            <button className="productButton">Update</button>
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="productButton"
+            >
+              Update
+            </button>
           </div>
         </form>
       </div>

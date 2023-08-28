@@ -74,6 +74,7 @@ export default function NewProduct() {
       },
       (error) => {
         // Handle unsuccessful uploads
+        console.log(error);
       },
       () => {
         // Handle successful uploads on complete

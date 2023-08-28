@@ -10,7 +10,7 @@ export default function WidgetLg() {
     const getOrders = async () => {
       try {
         const res = await userRequest.get("orders");
-        setOrders(res.data);
+        setOrders(res.data.data);
       } catch {}
     };
     getOrders();
@@ -28,7 +28,7 @@ export default function WidgetLg() {
           <th className="widgetLgTh">Amount</th>
           <th className="widgetLgTh">Status</th>
         </tr>
-        {orders.map((order) => (
+        {orders?.map((order) => (
           <tr className="widgetLgTr" key={order._id}>
             <td className="widgetLgUser">
               <span className="widgetLgName">{order.userId}</span>

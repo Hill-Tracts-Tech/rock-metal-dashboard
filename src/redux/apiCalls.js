@@ -7,9 +7,9 @@ import {
   deleteProductFailure,
   deleteProductStart,
   deleteProductSuccess,
-  updateProductFailure,
   updateProductStart,
   updateProductSuccess,
+  updateProductFailure,
   addProductFailure,
   addProductStart,
   addProductSuccess,
@@ -20,7 +20,7 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res.data.data));
-    alert("Loggedin Successfully");
+    alert("Logged in Successfully");
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(loginFailure(errorMessage));
@@ -37,12 +37,13 @@ export const getProducts = async (dispatch) => {
     dispatch(getProductFailure(errorMessage));
   }
 };
-
+// delete
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
   try {
     await userRequest.delete(`/products/${id}`);
     dispatch(deleteProductSuccess(id));
+    alert("Deleted product successfully");
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(deleteProductFailure(errorMessage));
@@ -52,18 +53,22 @@ export const deleteProduct = async (id, dispatch) => {
 export const updateProduct = async (id, product, dispatch) => {
   dispatch(updateProductStart());
   try {
-    // update
+    await userRequest.put(`/products/${id}`, product);
     dispatch(updateProductSuccess({ id, product }));
+    alert("Updated product Successfully");
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(updateProductFailure(errorMessage));
   }
 };
+
+//add product
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart());
   try {
     const res = await userRequest.post(`/products`, product);
     dispatch(addProductSuccess(res.data.data));
+    alert("Added product successfully");
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(addProductFailure(errorMessage));

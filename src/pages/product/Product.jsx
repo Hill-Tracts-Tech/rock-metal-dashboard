@@ -54,26 +54,25 @@ export default function Product() {
     getProduct();
   }, [productId]);
 
-  console.log(product);
-  useEffect(() => {
-    const getStats = async () => {
-      try {
-        const res = await userRequest.get("orders/income?pid=" + productId);
-        const list = res.data.sort((a, b) => {
-          return a._id - b._id;
-        });
-        list.map((item) =>
-          setPStats((prev) => [
-            ...prev,
-            { name: MONTHS[item._id - 1], Sales: item.total },
-          ])
-        );
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getStats();
-  }, [productId, MONTHS]);
+  // useEffect(() => {
+  //   const getStats = async () => {
+  //     try {
+  //       const res = await userRequest.get("orders/income?pid=" + productId);
+  //       const list = res.data.sort((a, b) => {
+  //         return a._id - b._id;
+  //       });
+  //       list.map((item) =>
+  //         setPStats((prev) => [
+  //           ...prev,
+  //           { name: MONTHS[item._id - 1], Sales: item.total },
+  //         ])
+  //       );
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getStats();
+  // }, [productId, MONTHS]);
 
   const [updateInput, setUpdate] = useState({});
 
@@ -140,7 +139,7 @@ export default function Product() {
       <h1 className="productTitle">Update: {product.title}</h1>
       <div className="productTop">
         <div className="productTopLeft">
-          <Chart data={pStats} dataKey="Sales" title="Sales Performance" />
+          {/* <Chart data={pStats} dataKey="Sales" title="Sales Performance" /> */}
         </div>
         <div className="productTopRight">
           <div className="productInfoTop">

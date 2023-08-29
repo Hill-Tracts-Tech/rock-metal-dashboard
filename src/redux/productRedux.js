@@ -21,6 +21,20 @@ export const productSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    // Get Ordered product
+    getOrderedProductsStart: (state) => {
+      state.isLoading = true;
+      state.error = "";
+    },
+    getOrderedProductsSuccess: (state, action) => {
+      state.isLoading = false;
+      state.products = action.payload;
+      state.error = "";
+    },
+    getOrderedProductsFailure: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
     //DELETE
     deleteProductStart: (state) => {
       state.isLoading = true;
@@ -77,6 +91,9 @@ export const {
   getProductStart,
   getProductSuccess,
   getProductFailure,
+  getOrderedProductsStart,
+  getOrderedProductsSuccess,
+  getOrderedProductsFailure,
   deleteProductStart,
   deleteProductSuccess,
   deleteProductFailure,

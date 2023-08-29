@@ -95,17 +95,10 @@ export default function Product() {
   const handleColors = (e) => {
     setColors(e.target.value.split(","));
   };
-
-  const updatedProduct = {
-    ...updateInput,
-    categories: cat,
-    size: sizes,
-    color: colors,
-  };
   // submit button
   const handleSubmit = (e) => {
     e.preventDefault();
-    const fileName = new Date().getTime() + file.name;
+    const fileName = new Date().getTime() + file?.name;
     const storage = getStorage(app);
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);

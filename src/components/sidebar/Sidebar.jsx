@@ -13,6 +13,7 @@ import {
   WorkOutline,
   Report,
   Add,
+  WebAsset,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
@@ -58,6 +59,12 @@ export default function Sidebar() {
               <li className="sidebarListItem">
                 <Add className="sidebarIcon" />
                 Add Product
+              </li>
+            </Link>
+            <Link to="/orders" className="link">
+              <li className="sidebarListItem">
+                <WebAsset className="sidebarIcon" />
+                Orders
               </li>
             </Link>
             <li className="sidebarListItem">

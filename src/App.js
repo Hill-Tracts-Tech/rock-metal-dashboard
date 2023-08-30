@@ -16,6 +16,7 @@ import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 import { useSelector } from "react-redux";
+import Transaction from "./pages/transaction/Transaction";
 import Orders from "./pages/Orders/Orders";
 import OrderDetails from "./pages/OrderDetails/OrderDetails";
 
@@ -49,13 +50,16 @@ function App() {
                 <Orders />
               </Route>
               <Route path="/orders/:orderedId">
-                <OrderDetails/>
+                <OrderDetails />
               </Route>
               <Route path="/product/:productId">
                 <Product />
               </Route>
               <Route path="/newproduct">
                 <NewProduct />
+              </Route>
+              <Route path="/transaction">
+                <Transaction />
               </Route>
             </div>
           </>

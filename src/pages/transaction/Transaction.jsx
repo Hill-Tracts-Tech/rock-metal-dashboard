@@ -52,8 +52,23 @@ const Transaction = () => {
       field: "total_amount",
       headerName: "Amount",
       width: 160,
+      renderCell: (params) => {
+        return <div className="total_amount">৳ {params.row.total_amount}</div>;
+      },
     },
-    { field: "paymentStatus", headerName: "Status", width: 200 },
+    {
+      field: "action",
+      headerName: "Action",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <>
+            <p style={{ marginRight: "10px" }}>{params.row.paymentStatus}</p>
+            <button className="productListEdit">Edit</button>
+          </>
+        );
+      },
+    },
   ];
 
   return (

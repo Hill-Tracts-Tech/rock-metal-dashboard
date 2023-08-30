@@ -4,6 +4,7 @@ import { NotificationsNone, Language, Settings } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/userRedux";
+import gravatar from "gravatar";
 
 export default function Topbar() {
   const [isPopupProfileOpen, setIsPopupProfileOpen] = useState(false);
@@ -18,6 +19,9 @@ export default function Topbar() {
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  const imageUrl = gravatar.url(email);
+
   return (
     <>
       <div className="top-bar">
@@ -40,11 +44,7 @@ export default function Topbar() {
               <Settings />
             </div>
             <div className="topAvatar" onClick={ProfileTogglePopup}>
-              <img
-                src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                alt=""
-                className="topAvatar-img"
-              />
+              <img src={imageUrl} alt="" className="topAvatar-img" />
             </div>
           </div>
         </div>

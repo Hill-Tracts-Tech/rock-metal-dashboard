@@ -13,6 +13,7 @@ import {
   WorkOutline,
   Report,
   Add,
+  WebAsset,
 } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
 
@@ -76,6 +77,16 @@ export default function Sidebar() {
               >
                 <Add className="sidebarIcon" />
                 Add Product
+              </li>
+            </Link>
+            <Link to="/orders" className="link">
+              <li
+                className={`sidebarListItem ${
+                  location.pathname === "/orders" ? "active" : ""
+                }`}
+              >
+                <WebAsset className="sidebarIcon" />
+                Orders
               </li>
             </Link>
             <Link to="/transaction" className="link">

@@ -13,6 +13,9 @@ import {
   addProductFailure,
   addProductStart,
   addProductSuccess,
+  getOrderedProductsStart,
+  getOrderedProductsSuccess,
+  getOrderedProductsFailure,
 } from "./productRedux";
 
 export const login = async (dispatch, user) => {
@@ -27,6 +30,7 @@ export const login = async (dispatch, user) => {
   }
 };
 
+// get all product
 export const getProducts = async (dispatch) => {
   dispatch(getProductStart());
   try {
@@ -35,6 +39,18 @@ export const getProducts = async (dispatch) => {
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(getProductFailure(errorMessage));
+  }
+};
+
+// get ordered product
+export const orderProducts = async (dispatch) => {
+  dispatch(getOrderedProductsStart());
+  try {
+    const res = await userRequest.get("/orders");
+    dispatch(getOrderedProductsSuccess(res.data.data));
+  } catch (err) {
+    const errorMessage = err.response?.data?.error || "An error has occurred!";
+    dispatch(getOrderedProductsFailure(errorMessage));
   }
 };
 // delete

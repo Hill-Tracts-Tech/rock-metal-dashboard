@@ -17,6 +17,8 @@ import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 import { useSelector } from "react-redux";
 import Transaction from "./pages/transaction/Transaction";
+import Orders from "./pages/Orders/Orders";
+import OrderDetails from "./pages/OrderDetails/OrderDetails";
 
 function App() {
   const admin = useSelector((state) => state.user?.currentUser?.isAdmin);
@@ -43,6 +45,12 @@ function App() {
               </Route>
               <Route path="/products">
                 <ProductList />
+              </Route>
+              <Route exact path="/orders">
+                <Orders />
+              </Route>
+              <Route path="/orders/:orderedId">
+                <OrderDetails />
               </Route>
               <Route path="/product/:productId">
                 <Product />

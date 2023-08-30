@@ -16,6 +16,7 @@ import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 import { useSelector } from "react-redux";
+import Transaction from "./pages/transaction/Transaction";
 
 function App() {
   const admin = useSelector((state) => state.user?.currentUser?.isAdmin);
@@ -48,6 +49,9 @@ function App() {
               </Route>
               <Route path="/newproduct">
                 <NewProduct />
+              </Route>
+              <Route path="/transaction">
+                <Transaction />
               </Route>
             </div>
           </>

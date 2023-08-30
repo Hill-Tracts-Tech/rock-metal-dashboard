@@ -15,7 +15,7 @@ export default function WidgetSm() {
     };
     getUsers();
   }, []);
-  
+
   return (
     <div className="widgetSm">
       <span className="widgetSmTitle">New Join Members</span>
@@ -31,7 +31,7 @@ export default function WidgetSm() {
               className="widgetSmImg"
             />
             <div className="widgetSmUser">
-              <span className="widgetSmUsername">{user.username}</span>
+              <span className="widgetSmUsername">{user.name}</span>
             </div>
             <button className="widgetSmButton">
               <Visibility className="widgetSmIcon" />

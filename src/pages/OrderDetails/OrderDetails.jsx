@@ -4,6 +4,7 @@ import { orderedOnes } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { DataGrid } from "@material-ui/data-grid";
+import Loading from "../../components/loader/Loading";
 
 export default function OrderDetails() {
   const location = useLocation();
@@ -73,7 +74,9 @@ export default function OrderDetails() {
   return (
     <div className="superContainer">
       {isLoading ? (
-        "Loading..."
+        <div style={{ marginTop: "100px" }}>
+          <Loading name={"block"} />
+        </div>
       ) : (
         <>
           <div className="shipping">

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { userRequest } from "../../requestMethods";
 import "./widgetLg.css";
 import { format } from "timeago.js";
+import Loading from "../loader/Loading";
 
 export default function WidgetLg() {
   const [orders, setOrders] = useState([]);
@@ -29,7 +30,7 @@ export default function WidgetLg() {
     <div className="widgetLg">
       <h3 className="widgetLgTitle">Latest transactions</h3>
       {isLoading ? (
-        <p>Loading...</p>
+        <Loading margin={"20px"} name={"circle"} />
       ) : (
         <table className="widgetLgTable">
           <tr className="widgetLgTr">

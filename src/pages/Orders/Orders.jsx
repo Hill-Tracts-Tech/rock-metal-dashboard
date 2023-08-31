@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, orderProducts } from "../../redux/apiCalls";
+import Loading from "../../components/loader/Loading";
 
 export default function Orders() {
   const dispatch = useDispatch();
@@ -83,7 +84,7 @@ export default function Orders() {
   return (
     <div className="productList">
       {isLoading ? (
-        <h1>Loading</h1>
+        <Loading name={"block"} />
       ) : (
         <DataGrid
           rows={products}

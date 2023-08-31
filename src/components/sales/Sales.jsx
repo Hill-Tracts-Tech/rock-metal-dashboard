@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   LineChart,
   Line,
@@ -9,22 +9,61 @@ import {
   Legend,
 } from "recharts";
 import "./sales.css";
+import { userRequest } from "../../requestMethods";
 
 const Sales = () => {
-  const data = [
-    { month: "Jan", income: 35412 },
-    { month: "Feb", income: 14580 },
-    { month: "Mar", income: 50000 },
-    { month: "Apr", income: 70000 },
-    { month: "May", income: 60000 },
-    { month: "Jun", income: 80000 },
-    { month: "Jul", income: 52000 },
-    { month: "Aug", income: 42000 },
-    { month: "Sep", income: 32000 },
-    { month: "Oct", income: 18000 },
-    { month: "Nov", income: 12000 },
-    { month: "Dec", income: 22000 },
+  const [monthlyIncomeData, setMonthlyIncomeData] = useState([]);
+
+  const MONTHS = useMemo(
+    () => [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    []
+  );
+
+  const COLORS = [
+    "#8884d8",
+    "#82ca9d",
+    "#ffc658",
+    "#f17422",
+    "#c71585",
+    "#008080",
+    "#f26d6d",
+    "#3cba9f",
+    "#8e5ea2",
+    "#e8c3b9",
+    "#c45850",
+    "#00CED1",
   ];
+
+  useEffect(() => {
+    const getSalesState = async () => {
+      try {
+        const res = await userRequest.get("/orders/income-stats");
+        const formattedData = res.data.data.map((item) => ({
+          name: MONTHS[item._id - 1],
+          "Total Income": item.total_amount,
+        }));
+        setMonthlyIncomeData(formattedData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getSalesState();
+  }, [MONTHS]);
+
+  console.log(monthlyIncomeData);
 
   return (
     <div
@@ -39,21 +78,34 @@ const Sales = () => {
       <LineChart
         width={800}
         height={400}
-        data={data}
+        data={monthlyIncomeData}
         margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="month" />
+        <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
         <Legend />
         <Line
           type="monotone"
-          dataKey="income"
+          dataKey="Total Income"
           stroke="#00ffaa"
           activeDot={{ r: 8 }}
         />
       </LineChart>
+      <div className="income-text">
+        <h3 style={{ textAlign: "center" }}>Monthly Income</h3>
+        <ul>
+          {monthlyIncomeData.map((item, index) => (
+            <li
+              key={item.name}
+              style={{ color: COLORS[index % COLORS.length] }}
+            >
+              {item.name}: {item["Total Income"]} BDT
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

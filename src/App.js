@@ -19,6 +19,8 @@ import { useSelector } from "react-redux";
 import Transaction from "./pages/transaction/Transaction";
 import Orders from "./pages/Orders/Orders";
 import OrderDetails from "./pages/OrderDetails/OrderDetails";
+import Analatics from "./components/analatics/Analatics";
+import Sales from "./components/sales/Sales";
 
 function App() {
   const admin = useSelector((state) => state.user?.currentUser?.isAdmin);
@@ -60,6 +62,12 @@ function App() {
               </Route>
               <Route path="/transaction">
                 <Transaction />
+              </Route>
+              <Route path="/analatics">
+                <Analatics />
+              </Route>
+              <Route path="/sales">
+                <Sales />
               </Route>
             </div>
           </>

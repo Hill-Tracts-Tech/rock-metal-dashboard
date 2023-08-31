@@ -46,7 +46,7 @@ export default function Sidebar() {
                 Analytics
               </li>
             </Link>
-            <Link to="/sales">
+            <Link to="/sales" className="link">
               <li
                 className={`sidebarListItem ${
                   location.pathname === "/sales" ? "active" : ""

@@ -1,17 +1,13 @@
 .container {
   width: 100%;
-}
-.wrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 4px;
 }
 .left-content {
-  width: 70% !important;
+  flex: 2;
   border: 1px solid teal;
 }
 .right-content {
-  width: 30% !important;
+  flex: 1;
   border: 1px solid teal;
 }

@@ -111,14 +111,16 @@ export default function Sidebar() {
                 Transactions
               </li>
             </Link>
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/users" ? "" : ""
-              }`}
-            >
-              <BarChart className="sidebarIcon" />
-              Reports
-            </li>
+            <Link className="link" to="/reports">
+              <li
+                className={`sidebarListItem ${
+                  location.pathname === "/users" ? "" : ""
+                }`}
+              >
+                <BarChart className="sidebarIcon" />
+                Reports
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">

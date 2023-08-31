@@ -63,48 +63,54 @@ const Sales = () => {
     getSalesState();
   }, [MONTHS]);
 
-  console.log(monthlyIncomeData);
+  const totalYearlyIncome = monthlyIncomeData.reduce(
+    (total, item) => total + item["Total Income"],
+    0
+  );
 
   return (
-    <div
-      className="incone"
-      style={{
-        flex: 4,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <LineChart
-        width={800}
-        height={400}
-        data={monthlyIncomeData}
-        margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
+    <div className="incone">
+      <h1 className="heading">Total Yearly Income: {totalYearlyIncome} BDT</h1>
+
+      <div
+        style={{
+          flex: 4,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="Total Income"
-          stroke="#00ffaa"
-          activeDot={{ r: 8 }}
-        />
-      </LineChart>
-      <div className="income-text">
-        <h3 style={{ textAlign: "center" }}>Monthly Income</h3>
-        <ul>
-          {monthlyIncomeData.map((item, index) => (
-            <li
-              key={item.name}
-              style={{ color: COLORS[index % COLORS.length] }}
-            >
-              {item.name}: {item["Total Income"]} BDT
-            </li>
-          ))}
-        </ul>
+        <LineChart
+          width={800}
+          height={400}
+          data={monthlyIncomeData}
+          margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line
+            type="monotone"
+            dataKey="Total Income"
+            stroke="#00ffaa"
+            activeDot={{ r: 8 }}
+          />
+        </LineChart>
+        <div className="income-text">
+          <h3 style={{ textAlign: "center" }}>Monthly Income</h3>
+          <ul>
+            {monthlyIncomeData.map((item, index) => (
+              <li
+                key={item.name}
+                style={{ color: COLORS[index % COLORS.length] }}
+              >
+                {item.name}: {item["Total Income"]} BDT
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

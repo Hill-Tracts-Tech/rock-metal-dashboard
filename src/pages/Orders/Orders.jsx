@@ -16,6 +16,7 @@ export default function Orders() {
   const handleDelete = (id) => {
     deleteProduct(id, dispatch);
   };
+  console.log("product", products);
   const columns = [
     { field: "transaction_Id", headerName: "Transition ID", width: 220 },
     {

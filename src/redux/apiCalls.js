@@ -16,6 +16,9 @@ import {
   getOrderedProductsStart,
   getOrderedProductsSuccess,
   getOrderedProductsFailure,
+  getSingleOrderStart,
+  getSingleOrderSuccess,
+  getSingleOrderFailure,
 } from "./productRedux";
 
 export const login = async (dispatch, user) => {
@@ -53,6 +56,18 @@ export const orderProducts = async (dispatch) => {
     dispatch(getOrderedProductsFailure(errorMessage));
   }
 };
+// get order one
+export const orderedOnes = async (id, dispatch) => {
+  dispatch(getSingleOrderStart());
+  try {
+    const res = await userRequest.get(`/orders/${id}`);
+    dispatch(getSingleOrderSuccess(res.data.data));
+  } catch (err) {
+    const errorMessage = err.response?.data?.error || "An error has occurred!";
+    dispatch(getSingleOrderFailure(errorMessage));
+  }
+};
+
 // delete
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());

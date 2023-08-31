@@ -8,8 +8,8 @@ import { deleteProduct, getProducts } from "../../redux/apiCalls";
 
 export default function ProductList() {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product.products);
-
+  const { products, isLoading } = useSelector((state) => state.product);
+  console.log(isLoading);
   useEffect(() => {
     getProducts(dispatch);
   }, [dispatch]);
@@ -61,16 +61,20 @@ export default function ProductList() {
 
   return (
     <div className="productList">
-      <DataGrid
-        rows={products}
-        disableSelectionOnClick
-        columns={columns}
-        getRowId={(row) => row._id}
-        checkboxSelection
-        pagination
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-      />
+      {isLoading ? (
+        <h1>Loading....</h1>
+      ) : (
+        <DataGrid
+          rows={products}
+          disableSelectionOnClick
+          columns={columns}
+          getRowId={(row) => row._id}
+          checkboxSelection
+          pagination
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+        />
+      )}
     </div>
   );
 }

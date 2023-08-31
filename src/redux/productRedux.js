@@ -5,6 +5,7 @@ export const productSlice = createSlice({
   initialState: {
     products: [],
     isLoading: false,
+    order: {},
     error: "",
   },
   reducers: {
@@ -32,6 +33,19 @@ export const productSlice = createSlice({
       state.error = "";
     },
     getOrderedProductsFailure: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    getSingleOrderStart: (state) => {
+      state.isLoading = true;
+      state.error = "";
+    },
+    getSingleOrderSuccess: (state, action) => {
+      state.isLoading = false;
+      state.order = action.payload;
+      state.error = "";
+    },
+    getSingleOrderFailure: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -103,6 +117,9 @@ export const {
   addProductStart,
   addProductSuccess,
   addProductFailure,
+  getSingleOrderStart,
+  getSingleOrderSuccess,
+  getSingleOrderFailure,
 } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -22,6 +22,35 @@ const Transaction = () => {
     getOrders();
   }, []);
 
+  const handleEdit = async (id) => {
+    try {
+      const field = orders.find((order) => order._id === id);
+      if (!field) {
+        console.log("Order not found");
+        return;
+      }
+
+      const newPaymentStatus =
+        field.paymentStatus.toLowerCase() === "pending" ? "Paid" : "Pending";
+
+      const res = await userRequest.post(`/orders/${id}`, {
+        paymentStatus: newPaymentStatus,
+      });
+
+      // Update the orders array with the new payment status
+      const updatedOrders = orders.map((order) =>
+        order._id === id ? { ...order, paymentStatus: newPaymentStatus } : order
+      );
+
+      // Update the state with the new orders array
+      setOrders(updatedOrders);
+      if (res.data) {
+        alert("Updated Payment Status");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const columns = [
     { field: "transaction_Id", headerName: "Transaction ID", width: 220 },
     {
@@ -58,13 +87,18 @@ const Transaction = () => {
     },
     {
       field: "action",
-      headerName: "Action",
+      headerName: "Payment",
       width: 150,
       renderCell: (params) => {
         return (
           <>
             <p style={{ marginRight: "10px" }}>{params.row.paymentStatus}</p>
-            <button className="productListEdit">Edit</button>
+            <button
+              className="productListEdit"
+              onClick={() => handleEdit(params.row._id)}
+            >
+              {params.row.paymentStatus === "Pending" ? "Paid" : "Pending"}
+            </button>
           </>
         );
       },

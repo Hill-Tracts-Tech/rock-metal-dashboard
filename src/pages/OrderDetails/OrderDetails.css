@@ -5,9 +5,43 @@
 }
 .left-content {
   flex: 2;
-  border: 1px solid teal;
+  border-radius: 6px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 .right-content {
   flex: 1;
-  border: 1px solid teal;
+  max-height: 300px;
+  border-radius: 6px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.orderList {
+  flex: 4;
+}
+
+.orderListItem {
+  display: flex;
+  align-items: center;
+}
+.right-content h3 {
+  font-weight: 500;
+  padding: 14px;
+}
+.orderListImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.cus_details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px;
+  gap: 4px;
+}
+.cus_details h4 {
+  font-weight: 600;
 }

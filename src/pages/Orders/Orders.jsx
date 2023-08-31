@@ -62,16 +62,17 @@ export default function Orders() {
       headerName: "Action",
       width: 150,
       renderCell: (params) => {
+        console.log(params);
         return (
           <div>
-            <Link to={`/orders/${params.row._id}`}>
+            <Link to={`/orders/${params.row.transaction_Id}`}>
               <button className="viewBtn">
                 <Visibility />
               </button>
             </Link>
             <DeleteOutline
               className="productListDelete"
-              onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDelete(params.row.transaction_Id)}
             />
           </div>
         );

@@ -36,14 +36,26 @@ export default function Sidebar() {
                 Home
               </li>
             </Link>
-            <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
-            <li className="sidebarListItem">
-              <TrendingUp className="sidebarIcon" />
-              Sales
-            </li>
+            <Link to="/analatics" className="link">
+              <li
+                className={`sidebarListItem ${
+                  location.pathname === "/analatics" ? "active" : ""
+                }`}
+              >
+                <Timeline className="sidebarIcon" />
+                Analytics
+              </li>
+            </Link>
+            <Link to="/sales" className="link">
+              <li
+                className={`sidebarListItem ${
+                  location.pathname === "/sales" ? "active" : ""
+                }`}
+              >
+                <TrendingUp className="sidebarIcon" />
+                Sales
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">

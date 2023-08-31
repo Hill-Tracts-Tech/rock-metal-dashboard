@@ -6,31 +6,27 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { userRequest } from "../../requestMethods";
+import { toast } from "react-toastify";
 
 export default function UserList() {
   const [data, setData] = useState([]);
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      await userRequest.delete(`/users/${id}`);
+      setData((prevData) => prevData.filter((user) => user._id !== id));
+      toast.success("User deleted successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error("Error deleting user. Please try again later.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
   };
-
-  // active status
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-
-  useEffect(() => {
-    // Add event listeners to detect changes in online/offline status
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
-
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-
-    // Clean up event listeners when the component unmounts
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-    };
-  }, []);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -44,10 +40,8 @@ export default function UserList() {
     getUsers();
   }, []);
 
-  console.log(isOnline);
-
   const columns = [
-    { field: "_id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 200 },
     {
       field: "user",
       headerName: "User",
@@ -76,7 +70,7 @@ export default function UserList() {
       headerName: "Active Status",
       width: 160,
       renderCell: (params) => {
-        return <div>{isOnline ? "Online" : "Offline"}</div>;
+        return <div>Online</div>;
       },
     },
     {
@@ -86,12 +80,12 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/user/" + params.row.id}>
+            <Link to={"/user/" + params.row._id}>
               <button className="userListEdit">Edit</button>
             </Link>
             <DeleteOutline
               className="userListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );

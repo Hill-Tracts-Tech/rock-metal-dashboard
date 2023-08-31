@@ -57,11 +57,7 @@ export default function Topbar() {
             </div>
             <div className="popupProfile">
               <div className="topAvatar">
-                <img
-                  src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                  alt=""
-                  className="topAvatar-img"
-                />
+                <img src={imageUrl} alt="" className="topAvatar-img" />
               </div>
               <span>{username}</span>
               <span>{email}</span>

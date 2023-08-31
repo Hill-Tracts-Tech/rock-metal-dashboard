@@ -8,6 +8,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { userRequest } from "../../requestMethods";
 import { format } from "timeago.js";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Transaction = () => {
   const [orders, setOrders] = useState([]);
@@ -21,6 +23,13 @@ const Transaction = () => {
     };
     getOrders();
   }, []);
+
+  const handleShowToast = () => {
+    toast.success("Payment Status Changed Successfully", {
+      position: "top-right",
+      autoClose: 3000,
+    });
+  };
 
   const handleEdit = async (id) => {
     try {
@@ -45,7 +54,7 @@ const Transaction = () => {
       // Update the state with the new orders array
       setOrders(updatedOrders);
       if (res.data) {
-        alert("Updated Payment Status");
+        handleShowToast();
       }
     } catch (error) {
       console.log(error);

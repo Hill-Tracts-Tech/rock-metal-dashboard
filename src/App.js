@@ -20,7 +20,7 @@ import Transaction from "./pages/transaction/Transaction";
 import Orders from "./pages/Orders/Orders";
 import OrderDetails from "./pages/OrderDetails/OrderDetails";
 import Analatics from "./components/analatics/Analatics";
-import Sales from "./components/sales/Sales";
+import Sales from "./pages/sales/Sales";
 import Reports from "./pages/report/Reports";
 
 function App() {

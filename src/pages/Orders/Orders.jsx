@@ -22,12 +22,12 @@ export default function Orders() {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3bb077",
+      confirmButtonColor: "#00ffbb",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // delete single order
+        deleteOrder(id, dispatch);
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });

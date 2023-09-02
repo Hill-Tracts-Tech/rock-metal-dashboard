@@ -12,7 +12,7 @@ export default function WidgetLg() {
     setloading(true);
     const getOrders = async () => {
       try {
-        const res = await userRequest.get("orders");
+        const res = await userRequest.get("orders/?limit=5");
         setOrders(res.data.data);
         setloading(false);
       } catch (error) {
@@ -25,7 +25,7 @@ export default function WidgetLg() {
   const Button = ({ type }) => {
     return <button className={"widgetLgButton " + type}>{type}</button>;
   };
-  console.log(orders);
+
   return (
     <div className="widgetLg">
       <h3 className="widgetLgTitle">Latest transactions</h3>
@@ -39,7 +39,7 @@ export default function WidgetLg() {
             <th className="widgetLgTh">Amount</th>
             <th className="widgetLgTh">Status</th>
           </tr>
-          {orders?.map(
+          {orders.map(
             ({
               transaction_Id,
               paymentStatus,

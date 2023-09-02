@@ -95,7 +95,7 @@ export default function OrderDetails() {
             </div>
             <div>
               <h2>Transaction Details</h2>
-              <p>Transaction ID : {tran_id}</p>
+              <p>Transaction ID : {tran_id.toUpperCase()}</p>
               <p>Total : ৳ {total_amount}</p>
               <p>Method : {shipping_method}</p>
               <p>

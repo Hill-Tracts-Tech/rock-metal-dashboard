@@ -4,13 +4,13 @@ import { DeleteOutline, Visibility } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteOrder, orderProducts } from "../../redux/apiCalls";
 import Loading from "../../components/loader/Loading";
 import Swal from "sweetalert2";
+import { deleteOrder, orderProducts } from "./serviceApi";
 
 export default function Orders() {
   const dispatch = useDispatch();
-  const { products, isLoading } = useSelector((state) => state.product);
+  const { orders, isLoading } = useSelector((state) => state.order);
 
   useEffect(() => {
     orderProducts(dispatch);
@@ -78,7 +78,6 @@ export default function Orders() {
       headerName: "Action",
       width: 150,
       renderCell: (params) => {
-        console.log(params);
         return (
           <div>
             <Link to={`/orders/${params.row.transaction_Id}`}>
@@ -102,7 +101,7 @@ export default function Orders() {
         <Loading name={"block"} />
       ) : (
         <DataGrid
-          rows={products}
+          rows={orders}
           disableSelectionOnClick
           columns={columns}
           getRowId={(row) => row._id}

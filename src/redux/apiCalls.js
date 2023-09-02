@@ -14,15 +14,6 @@ import {
   addProductFailure,
   addProductStart,
   addProductSuccess,
-  getOrderedProductsStart,
-  getOrderedProductsSuccess,
-  getOrderedProductsFailure,
-  getSingleOrderStart,
-  getSingleOrderSuccess,
-  getSingleOrderFailure,
-  deleteOrderStart,
-  deleteOrderSuccess,
-  deleteOrderFailure,
 } from "./productRedux";
 
 export const login = async (dispatch, user) => {
@@ -63,56 +54,6 @@ export const getProducts = async (dispatch) => {
   }
 };
 
-// get ordered product
-export const orderProducts = async (dispatch) => {
-  dispatch(getOrderedProductsStart());
-  try {
-    const res = await userRequest.get("/orders");
-    dispatch(getOrderedProductsSuccess(res.data.data));
-  } catch (err) {
-    const errorMessage = err.response?.data?.error || "An error has occurred!";
-    dispatch(getOrderedProductsFailure(errorMessage));
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: errorMessage,
-    });
-  }
-};
-// get order one
-export const orderedOnes = async (id, dispatch) => {
-  dispatch(getSingleOrderStart());
-  try {
-    const res = await userRequest.get(`/orders/${id}`);
-    dispatch(getSingleOrderSuccess(res.data.data));
-  } catch (err) {
-    const errorMessage = err.response?.data?.error || "An error has occurred!";
-    dispatch(getSingleOrderFailure(errorMessage));
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: errorMessage,
-    });
-  }
-};
-
-// DELETE ORDER
-export const deleteOrder = async (id, dispatch) => {
-  dispatch(deleteOrderStart());
-  try {
-    const res = await userRequest.delete(`/orders/${id}`);
-    dispatch(deleteOrderSuccess(res.data.data));
-  } catch (err) {
-    const errorMessage = err.response?.data?.error || "An error has occurred!";
-    dispatch(deleteOrderFailure(errorMessage));
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: errorMessage,
-    });
-  }
-};
-
 // delete
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
@@ -135,7 +76,6 @@ export const updateProduct = async (id, product, dispatch) => {
   try {
     await userRequest.put(`/products/${id}`, product);
     dispatch(updateProductSuccess({ id, product }));
-    alert("Updated product Successfully");
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(updateProductFailure(errorMessage));
@@ -153,7 +93,6 @@ export const addProduct = async (product, dispatch) => {
   try {
     const res = await userRequest.post(`/products`, product);
     dispatch(addProductSuccess(res.data.data));
-    alert("Added product successfully");
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(addProductFailure(errorMessage));

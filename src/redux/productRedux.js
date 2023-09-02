@@ -3,9 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const productSlice = createSlice({
   name: "product",
   initialState: {
-    products: [],
     isLoading: false,
-    order: {},
+    products: [],
     error: "",
   },
   reducers: {
@@ -19,47 +18,6 @@ export const productSlice = createSlice({
       state.products = action.payload;
     },
     getProductFailure: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    // Get Ordered product
-    getOrderedProductsStart: (state) => {
-      state.isLoading = true;
-      state.error = "";
-    },
-    getOrderedProductsSuccess: (state, action) => {
-      state.isLoading = false;
-      state.products = action.payload;
-      state.error = "";
-    },
-    getOrderedProductsFailure: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    getSingleOrderStart: (state) => {
-      state.isLoading = true;
-      state.error = "";
-    },
-    getSingleOrderSuccess: (state, action) => {
-      state.isLoading = false;
-      state.order = action.payload;
-      state.error = "";
-    },
-    getSingleOrderFailure: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    // Delete Order
-    deleteOrderStart: (state, action) => {
-      state.isLoading = true;
-      state.error = "";
-    },
-
-    deleteOrderSuccess: (state, action) => {
-      state.isLoading = false;
-      state.order = {};
-    },
-    deleteOrderFailure: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -120,9 +78,6 @@ export const {
   getProductStart,
   getProductSuccess,
   getProductFailure,
-  getOrderedProductsStart,
-  getOrderedProductsSuccess,
-  getOrderedProductsFailure,
   deleteProductStart,
   deleteProductSuccess,
   deleteProductFailure,
@@ -132,12 +87,6 @@ export const {
   addProductStart,
   addProductSuccess,
   addProductFailure,
-  getSingleOrderStart,
-  getSingleOrderSuccess,
-  getSingleOrderFailure,
-  deleteOrderStart,
-  deleteOrderSuccess,
-  deleteOrderFailure,
 } = productSlice.actions;
 
 export default productSlice.reducer;

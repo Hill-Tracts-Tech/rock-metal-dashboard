@@ -19,7 +19,11 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function Sidebar() {
   const location = useLocation();
-  console.log(location.pathname);
+
+  const route = location.pathname.split("/");
+
+  console.log(route.includes("reports"), "route");
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -29,7 +33,7 @@ export default function Sidebar() {
             <Link to="/" className="link">
               <li
                 className={`sidebarListItem ${
-                  location.pathname === "/" ? "active" : ""
+                  route.includes("/") ? "active" : ""
                 }`}
               >
                 <LineStyle className="sidebarIcon" />
@@ -39,7 +43,7 @@ export default function Sidebar() {
             <Link to="/analatics" className="link">
               <li
                 className={`sidebarListItem ${
-                  location.pathname === "/analatics" ? "active" : ""
+                  route.includes("analatics") ? "active" : ""
                 }`}
               >
                 <Timeline className="sidebarIcon" />
@@ -49,7 +53,7 @@ export default function Sidebar() {
             <Link to="/sales" className="link">
               <li
                 className={`sidebarListItem ${
-                  location.pathname === "/sales" ? "active" : ""
+                  route.includes("sales") ? "active" : ""
                 }`}
               >
                 <TrendingUp className="sidebarIcon" />
@@ -64,7 +68,7 @@ export default function Sidebar() {
             <Link to="/users" className="link">
               <li
                 className={`sidebarListItem ${
-                  location.pathname === "/users" ? "active" : ""
+                  route.includes("users") ? "active" : ""
                 }`}
               >
                 <PermIdentity className="sidebarIcon" />
@@ -74,7 +78,7 @@ export default function Sidebar() {
             <Link to="/products" className="link">
               <li
                 className={`sidebarListItem ${
-                  location.pathname === "/products" ? "active" : ""
+                  route.includes("products") ? "active" : ""
                 }`}
               >
                 <Storefront className="sidebarIcon" />
@@ -84,7 +88,7 @@ export default function Sidebar() {
             <Link to="/newproduct" className="link">
               <li
                 className={`sidebarListItem ${
-                  location.pathname === "/newproduct" ? "active" : ""
+                  route.includes("newproduct") ? "active" : ""
                 }`}
               >
                 <Add className="sidebarIcon" />
@@ -94,7 +98,7 @@ export default function Sidebar() {
             <Link to="/orders" className="link">
               <li
                 className={`sidebarListItem ${
-                  location.pathname === "/orders" ? "active" : ""
+                  route.includes("orders") ? "active" : ""
                 }`}
               >
                 <WebAsset className="sidebarIcon" />
@@ -104,7 +108,7 @@ export default function Sidebar() {
             <Link to="/transaction" className="link">
               <li
                 className={`sidebarListItem ${
-                  location.pathname === "/transaction" ? "active" : ""
+                  route.includes("transaction") ? "active" : ""
                 }`}
               >
                 <AttachMoney className="sidebarIcon" />
@@ -114,7 +118,7 @@ export default function Sidebar() {
             <Link className="link" to="/reports">
               <li
                 className={`sidebarListItem ${
-                  location.pathname === "/users" ? "" : ""
+                  route.includes("reports") ? "active" : ""
                 }`}
               >
                 <BarChart className="sidebarIcon" />

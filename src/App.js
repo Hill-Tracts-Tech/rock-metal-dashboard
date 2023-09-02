@@ -2,12 +2,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import "./App.css";
 import Home from "./pages/home/Home";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
@@ -18,14 +13,13 @@ import Login from "./pages/login/Login";
 import { useSelector } from "react-redux";
 import Transaction from "./pages/transaction/Transaction";
 import Orders from "./pages/Orders/Orders";
-import OrderDetails from "./pages/OrderDetails/OrderDetails";
 import Analatics from "./components/analatics/Analatics";
 import Sales from "./pages/sales/Sales";
 import Reports from "./pages/report/Reports";
+import OrderDetails from "./pages/Orders/OrderDetails/OrderDetails";
 
 function App() {
   const admin = useSelector((state) => state.user?.currentUser?.isAdmin);
-  console.log(admin);
   return (
     <Router>
       <Switch>

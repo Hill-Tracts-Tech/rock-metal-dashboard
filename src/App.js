@@ -17,63 +17,66 @@ import Reports from "./pages/report/Reports";
 import OrderDetails from "./pages/Orders/OrderDetails/OrderDetails";
 import NewProduct from "./pages/productList/newProduct/NewProduct";
 import Product from "./pages/productList/product/Product";
+import ErrorBoundary from "./utils/ErrorBoundary";
 
 function App() {
   const admin = useSelector((state) => state.user?.currentUser?.isAdmin);
   return (
-    <Router>
-      <Switch>
-        {admin ? (
-          <>
-            <Topbar />
-            <div className="container">
-              <Sidebar />
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route path="/users">
-                <UserList />
-              </Route>
-              <Route path="/user/:userId">
-                <User />
-              </Route>
-              <Route path="/newUser">
-                <NewUser />
-              </Route>
-              <Route path="/products">
-                <ProductList />
-              </Route>
-              <Route exact path="/orders">
-                <Orders />
-              </Route>
-              <Route path="/orders/:orderedId">
-                <OrderDetails />
-              </Route>
-              <Route path="/product/:productId">
-                <Product />
-              </Route>
-              <Route path="/newproduct">
-                <NewProduct />
-              </Route>
-              <Route path="/transaction">
-                <Transaction />
-              </Route>
-              <Route path="/analatics">
-                <Analatics />
-              </Route>
-              <Route path="/sales">
-                <Sales />
-              </Route>
-              <Route path="/reports">
-                <Reports />
-              </Route>
-            </div>
-          </>
-        ) : (
-          <Login />
-        )}
-      </Switch>
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <Switch>
+          {admin ? (
+            <>
+              <Topbar />
+              <div className="container">
+                <Sidebar />
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route path="/users">
+                  <UserList />
+                </Route>
+                <Route path="/user/:userId">
+                  <User />
+                </Route>
+                <Route path="/newUser">
+                  <NewUser />
+                </Route>
+                <Route path="/products">
+                  <ProductList />
+                </Route>
+                <Route exact path="/orders">
+                  <Orders />
+                </Route>
+                <Route path="/orders/:orderedId">
+                  <OrderDetails />
+                </Route>
+                <Route path="/product/:productId">
+                  <Product />
+                </Route>
+                <Route path="/newproduct">
+                  <NewProduct />
+                </Route>
+                <Route path="/transaction">
+                  <Transaction />
+                </Route>
+                <Route path="/analatics">
+                  <Analatics />
+                </Route>
+                <Route path="/sales">
+                  <Sales />
+                </Route>
+                <Route path="/reports">
+                  <Reports />
+                </Route>
+              </div>
+            </>
+          ) : (
+            <Login />
+          )}
+        </Switch>
+      </Router>
+    </ErrorBoundary>
   );
 }
 

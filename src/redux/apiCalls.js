@@ -58,7 +58,7 @@ export const getProducts = async (dispatch) => {
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
   try {
-    await userRequest.delete(`/orders/${id}`);
+    await userRequest.delete(`/products/${id}`);
     dispatch(deleteProductSuccess(id));
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";

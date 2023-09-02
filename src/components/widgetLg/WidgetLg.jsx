@@ -3,6 +3,7 @@ import { userRequest } from "../../requestMethods";
 import "./widgetLg.css";
 import { format } from "timeago.js";
 import Loading from "../loader/Loading";
+import Swal from "sweetalert2";
 
 export default function WidgetLg() {
   const [orders, setOrders] = useState([]);
@@ -16,8 +17,12 @@ export default function WidgetLg() {
         setOrders(res.data.data);
         setloading(false);
       } catch (error) {
-        console.log(error);
         setloading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
       }
     };
     getOrders();

@@ -3,9 +3,6 @@ import Topbar from "./components/topbar/Topbar";
 import "./App.css";
 import Home from "./pages/home/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import UserList from "./pages/userList/UserList";
-import User from "./pages/user/User";
-import NewUser from "./pages/newUser/NewUser";
 import ProductList from "./pages/productList/ProductList";
 import Login from "./pages/login/Login";
 import { useSelector } from "react-redux";
@@ -18,6 +15,9 @@ import OrderDetails from "./pages/Orders/OrderDetails/OrderDetails";
 import NewProduct from "./pages/productList/newProduct/NewProduct";
 import Product from "./pages/productList/product/Product";
 import ErrorBoundary from "./utils/ErrorBoundary";
+import UserList from "../src/pages/userList/UserList";
+import User from "../src/pages/userList/user/User";
+import NewUser from "../src/pages/userList/newUser/NewUser";
 
 function App() {
   const admin = useSelector((state) => state.user?.currentUser?.isAdmin);

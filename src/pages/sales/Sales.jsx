@@ -10,8 +10,8 @@ import {
 } from "recharts";
 import "./sales.css";
 import { userRequest } from "../../requestMethods";
-import Loading from "../loader/Loading";
 import { COLORS } from "../../utils";
+import Loading from "../../components/loader/Loading";
 
 const Sales = () => {
   const [monthlyIncomeData, setMonthlyIncomeData] = useState([]);

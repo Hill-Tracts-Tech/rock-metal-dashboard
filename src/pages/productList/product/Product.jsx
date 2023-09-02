@@ -15,6 +15,7 @@ import app from "../../../firebase";
 import { toast } from "react-toastify";
 import { updateProduct } from "../serviceApi";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function Product() {
   const location = useLocation();
@@ -52,7 +53,11 @@ export default function Product() {
         const res = await userRequest.get(`/products/find/${productId}`);
         setProduct(res.data.data);
       } catch (error) {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
       }
     };
     getProduct();

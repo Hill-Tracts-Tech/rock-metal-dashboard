@@ -47,8 +47,12 @@ export default function UserList() {
         setData(res.data.data);
         setIsloading(false);
       } catch (error) {
-        console.log(error);
         setIsloading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
       }
     };
     getUsers();

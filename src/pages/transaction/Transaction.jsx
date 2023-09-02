@@ -11,6 +11,7 @@ import { format } from "timeago.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "../../components/loader/Loading";
+import Swal from "sweetalert2";
 
 const Transaction = () => {
   const [orders, setOrders] = useState([]);
@@ -25,6 +26,11 @@ const Transaction = () => {
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
       }
     };
     getOrders();
@@ -63,7 +69,11 @@ const Transaction = () => {
         handleShowToast();
       }
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error,
+      });
     }
   };
   const columns = [

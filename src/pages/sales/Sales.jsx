@@ -12,6 +12,7 @@ import "./sales.css";
 import { userRequest } from "../../requestMethods";
 import { COLORS } from "../../utils";
 import Loading from "../../components/loader/Loading";
+import Swal from "sweetalert2";
 
 const Sales = () => {
   const [monthlyIncomeData, setMonthlyIncomeData] = useState([]);
@@ -47,8 +48,12 @@ const Sales = () => {
         setMonthlyIncomeData(formattedData);
         setIsloading(false);
       } catch (error) {
-        setIsloading(false);
         console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
       }
     };
     getSalesState();

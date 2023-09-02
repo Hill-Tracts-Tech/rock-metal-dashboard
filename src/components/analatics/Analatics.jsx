@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Chart from "../chart/Chart";
 import { userRequest } from "../../requestMethods";
 import "./analatics.css";
+import Swal from "sweetalert2";
 
 const Analatics = () => {
   const [userStats, setUserStats] = useState([]);
@@ -43,8 +44,12 @@ const Analatics = () => {
         setUserStats(newData);
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
         setIsLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
       }
     };
     getStats();

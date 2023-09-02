@@ -5,6 +5,7 @@ import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
+import Swal from "sweetalert2";
 
 export default function Home() {
   const [userStats, setUserStats] = useState([]);
@@ -46,8 +47,12 @@ export default function Home() {
         setUserStats(newData);
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
         setIsLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
       }
     };
     getStats();

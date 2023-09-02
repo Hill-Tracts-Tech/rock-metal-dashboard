@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/apiCalls";
 import "./Login.css";
 import profile from "../../assets/profile.png";
 import Swal from "sweetalert2";
-import { clear } from "../../redux/userRedux";
+import { login } from "../userList/serviceApi";
+import { clear } from "../userList/userRedux";
 
 const Login = () => {
   const { isLoading, error } = useSelector((state) => state.user);

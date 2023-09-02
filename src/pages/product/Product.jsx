@@ -13,10 +13,11 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import app from "../../firebase";
+import { toast } from "react-toastify";
 
 export default function Product() {
   const location = useLocation();
-  const productId = location.pathname.split("/")[2];
+  const productId = location.pathname?.split("/")[2];
   const [pStats, setPStats] = useState([]);
   const [product, setProduct] = useState({});
   const [file, setFile] = useState(null);
@@ -94,45 +95,68 @@ export default function Product() {
   const handleColors = (e) => {
     setColors(e.target.value.split(","));
   };
+
   // submit button
   const handleSubmit = (e) => {
     e.preventDefault();
-    const fileName = new Date().getTime() + file?.name;
-    const storage = getStorage(app);
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
-          default:
+    if (file?.name) {
+      const fileName = new Date().getTime() + file?.name;
+      const storage = getStorage(app);
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+          }
+        },
+        (error) => {
+          console.log(error);
+          toast.error("Error updating product. Please try again later.", {
+            position: "top-right",
+            autoClose: 3000,
+          });
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            const updatedProduct = {
+              ...updateInput,
+              categories: cat,
+              img: downloadURL,
+              size: sizes,
+              color: colors,
+            };
+            updateProduct(productId, updatedProduct, dispatch);
+            toast.success("Product Updated successfully!", {
+              position: "top-right",
+              autoClose: 3000,
+            });
+          });
         }
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          const updatedProduct = {
-            ...updateInput,
-            categories: cat,
-            img: downloadURL,
-            size: sizes,
-            color: colors,
-          };
-          updateProduct(productId, updatedProduct, dispatch);
-        });
-      }
-    );
+      );
+    } else {
+      const updatedProduct = {
+        ...updateInput,
+        categories: cat,
+        size: sizes,
+        color: colors,
+      };
+      updateProduct(productId, updatedProduct, dispatch);
+      toast.success("Product Updated successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
   };
   return (
     <div className="product">
@@ -143,7 +167,11 @@ export default function Product() {
         </div>
         <div className="productTopRight">
           <div className="productInfoTop">
-            <img src={product?.img} alt="" className="productInfoImg" />
+            <img
+              src={file?.name ? URL.createObjectURL(file) : product?.img}
+              alt=""
+              className="productInfoImg"
+            />
             <span className="productName">{product?.title}</span>
           </div>
           <div className="productInfoBottom">
@@ -257,7 +285,11 @@ export default function Product() {
 
             <div className="productFormRight">
               <div className="productUpload">
-                <img src={product.img} alt="" className="productUploadImg" />
+                <img
+                  src={file?.name ? URL.createObjectURL(file) : product.img}
+                  alt=""
+                  className="productUploadImg"
+                />
                 <label for="file">
                   <Publish />
                 </label>

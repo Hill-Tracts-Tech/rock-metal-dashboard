@@ -22,7 +22,7 @@ export default function Sidebar() {
 
   const route = location.pathname.split("/");
 
-  console.log(route.includes("reports"), "route");
+  console.log(route.includes(""), "route");
 
   return (
     <div className="sidebar">
@@ -33,7 +33,7 @@ export default function Sidebar() {
             <Link to="/" className="link">
               <li
                 className={`sidebarListItem ${
-                  route.includes("/") ? "active" : ""
+                  location.pathname === "/" ? "active" : ""
                 }`}
               >
                 <LineStyle className="sidebarIcon" />

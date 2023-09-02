@@ -49,6 +49,21 @@ export const productSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    // Delete Order
+    deleteOrderStart: (state, action) => {
+      state.isLoading = true;
+      state.error = "";
+    },
+
+    deleteOrderSuccess: (state, action) => {
+      state.isLoading = false;
+      state.order = {};
+    },
+    deleteOrderFailure: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
     //DELETE
     deleteProductStart: (state) => {
       state.isLoading = true;
@@ -120,6 +135,9 @@ export const {
   getSingleOrderStart,
   getSingleOrderSuccess,
   getSingleOrderFailure,
+  deleteOrderStart,
+  deleteOrderSuccess,
+  deleteOrderFailure,
 } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/apiCalls";
 import Loading from "../../components/loader/Loading";
+import Swal from "sweetalert2";
 
 export default function ProductList() {
   const dispatch = useDispatch();
@@ -15,7 +16,20 @@ export default function ProductList() {
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    deleteProduct(id, dispatch);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3bb077",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProduct(id, dispatch);
+        Swal.fire("Deleted!", "Your product has been deleted.", "success");
+      }
+    });
   };
 
   const columns = [

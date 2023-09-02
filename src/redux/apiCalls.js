@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { loginFailure, loginStart, loginSuccess } from "./userRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
@@ -19,6 +20,9 @@ import {
   getSingleOrderStart,
   getSingleOrderSuccess,
   getSingleOrderFailure,
+  deleteOrderStart,
+  deleteOrderSuccess,
+  deleteOrderFailure,
 } from "./productRedux";
 
 export const login = async (dispatch, user) => {
@@ -26,10 +30,19 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res.data.data));
-    alert("Logged in Successfully");
+    Swal.fire({
+      icon: "success",
+      title: "SuccessFul",
+      text: "Login Successful",
+    });
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(loginFailure(errorMessage));
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: errorMessage,
+    });
   }
 };
 
@@ -42,6 +55,11 @@ export const getProducts = async (dispatch) => {
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(getProductFailure(errorMessage));
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: errorMessage,
+    });
   }
 };
 
@@ -54,6 +72,11 @@ export const orderProducts = async (dispatch) => {
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error has occurred!";
     dispatch(getOrderedProductsFailure(errorMessage));
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: errorMessage,
+    });
   }
 };
 // get order one
@@ -65,6 +88,28 @@ export const orderedOnes = async (id, dispatch) => {
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error has occurred!";
     dispatch(getSingleOrderFailure(errorMessage));
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: errorMessage,
+    });
+  }
+};
+
+// DELETE ORDER
+export const deleteOrder = async (id, dispatch) => {
+  dispatch(deleteOrderStart());
+  try {
+    const res = await userRequest.delete(`/orders/${id}`);
+    dispatch(deleteOrderSuccess(res.data.data));
+  } catch (err) {
+    const errorMessage = err.response?.data?.error || "An error has occurred!";
+    dispatch(deleteOrderFailure(errorMessage));
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: errorMessage,
+    });
   }
 };
 
@@ -72,12 +117,16 @@ export const orderedOnes = async (id, dispatch) => {
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
   try {
-    await userRequest.delete(`/products/${id}`);
+    await userRequest.delete(`/orders/${id}`);
     dispatch(deleteProductSuccess(id));
-    alert("Deleted product successfully");
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(deleteProductFailure(errorMessage));
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: errorMessage,
+    });
   }
 };
 
@@ -90,6 +139,11 @@ export const updateProduct = async (id, product, dispatch) => {
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(updateProductFailure(errorMessage));
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: errorMessage,
+    });
   }
 };
 
@@ -103,5 +157,10 @@ export const addProduct = async (product, dispatch) => {
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(addProductFailure(errorMessage));
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: errorMessage,
+    });
   }
 };

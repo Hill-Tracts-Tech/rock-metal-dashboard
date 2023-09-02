@@ -4,8 +4,9 @@ import { DeleteOutline, Visibility } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, orderProducts } from "../../redux/apiCalls";
+import { deleteOrder, orderProducts } from "../../redux/apiCalls";
 import Loading from "../../components/loader/Loading";
+import Swal from "sweetalert2";
 
 export default function Orders() {
   const dispatch = useDispatch();
@@ -14,10 +15,24 @@ export default function Orders() {
   useEffect(() => {
     orderProducts(dispatch);
   }, [dispatch]);
+
   const handleDelete = (id) => {
-    deleteProduct(id, dispatch);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3bb077",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // delete single order
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
   };
-  console.log("product", products);
+
   const columns = [
     { field: "transaction_Id", headerName: "Transition ID", width: 220 },
     {

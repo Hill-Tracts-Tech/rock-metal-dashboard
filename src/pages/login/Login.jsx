@@ -1,17 +1,37 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/apiCalls";
 import "./Login.css";
 import profile from "../../assets/profile.png";
+import Swal from "sweetalert2";
+import { clear } from "../../redux/userRedux";
+
 const Login = () => {
+  const { isLoading, error } = useSelector((state) => state.user);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Email and Password is required",
+      });
+      return;
+    }
+
     login(dispatch, { email, password });
   };
+
+  useEffect(() => {
+    dispatch(clear());
+  }, [dispatch, error]);
+
   return (
     <div className="l-container">
       <div className="l-wrapper">

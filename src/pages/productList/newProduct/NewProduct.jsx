@@ -6,12 +6,12 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import app from "../../firebase";
-import { addProduct } from "../../redux/apiCalls";
+import app from "../../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import Loading from "../../components/loader/Loading";
+import Loading from "../../../components/loader/Loading";
 import { useHistory } from "react-router-dom";
+import { addProduct } from "../serviceApi";
 
 export default function NewProduct() {
   const { isLoading } = useSelector((state) => state.product);

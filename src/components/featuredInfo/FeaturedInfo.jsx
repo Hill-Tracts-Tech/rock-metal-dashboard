@@ -49,70 +49,49 @@ export default function FeaturedInfo() {
   const currentMonth = currentDate.getMonth() + 1;
 
   const currentMonthIncome = income.find((item) => item._id === currentMonth);
-
   return (
     <div className="featured">
       <div className="featuredItem">
-        {!currentMonthIncome ? (
-          <Loading name={"ball"} />
-        ) : (
-          <>
-            {" "}
-            <span className="featuredTitle">
-              {" "}
-              {currentMonthIncome && MONTHS[currentMonth - 1]}
+        <span className="featuredTitle">
+          {" "}
+          {(currentMonthIncome && MONTHS[currentMonth - 1]) || "NOT FOUND"}
+        </span>
+        <div className="featuredMoneyContainer">
+          {currentMonthIncome && (
+            <span className="featuredMoney">
+              ৳ {currentMonthIncome.total_amount} BDT
             </span>
-            <div className="featuredMoneyContainer">
-              {currentMonthIncome && (
-                <span className="featuredMoney">
-                  ৳ {currentMonthIncome.total_amount} BDT
-                </span>
-              )}
-              <span className="featuredMoneyRate">
-                %{Math.floor(perc)}{" "}
-                {perc < 0 ? (
-                  <ArrowDownward className="featuredIcon negative" />
-                ) : (
-                  <ArrowUpward className="featuredIcon" />
-                )}
-              </span>
-            </div>
-            <span className="featuredSub">Compared to last month</span>
-          </>
-        )}
+          )}
+          <span className="featuredMoneyRate">
+            %{Math.floor(perc)}{" "}
+            {perc < 0 ? (
+              <ArrowDownward className="featuredIcon negative" />
+            ) : (
+              <ArrowUpward className="featuredIcon" />
+            )}
+          </span>
+        </div>
+        <span className="featuredSub">Compared to last month</span>
       </div>
       <div className="featuredItem">
-        {!totalIncome ? (
-          <Loading name={"ball"} />
-        ) : (
-          <>
-            {" "}
-            <span className="featuredTitle">Total Sales</span>
-            <div className="featuredMoneyContainer">
-              <span className="featuredMoney">৳ {totalIncome}</span>
-              <span className="featuredMoneyRate">
-                -1.4 <ArrowDownward className="featuredIcon negative" />
-              </span>
-            </div>
-            <span className="featuredSub">Compared to last month</span>
-          </>
-        )}
+        <span className="featuredTitle">Total Sales</span>
+        <div className="featuredMoneyContainer">
+          <span className="featuredMoney">৳ {totalIncome}</span>
+          <span className="featuredMoneyRate">
+            -1.4 <ArrowDownward className="featuredIcon negative" />
+          </span>
+        </div>
+        <span className="featuredSub">Compared to last month</span>
       </div>
       <div className="featuredItem">
-        {false ? (
-          <Loading name={"ball"} />
-        ) : (
-          <>
-            <span className="featuredTitle">Cost</span>
-            <div className="featuredMoneyContainer">
-              <span className="featuredMoney">৳ Not Applicable</span>
-              <span className="featuredMoneyRate">
-                +2.4 <ArrowUpward className="featuredIcon" />
-              </span>
-            </div>
-            <span className="featuredSub">Compared to last month</span>
-          </>
-        )}
+        <span className="featuredTitle">Cost</span>
+        <div className="featuredMoneyContainer">
+          <span className="featuredMoney">৳ Not Applicable</span>
+          <span className="featuredMoneyRate">
+            +2.4 <ArrowUpward className="featuredIcon" />
+          </span>
+        </div>
+        <span className="featuredSub">Compared to last month</span>
       </div>
     </div>
   );

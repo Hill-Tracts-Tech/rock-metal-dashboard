@@ -7,8 +7,6 @@ import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
 import ProductList from "./pages/productList/ProductList";
-import Product from "./pages/product/Product";
-import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 import { useSelector } from "react-redux";
 import Transaction from "./pages/transaction/Transaction";
@@ -17,6 +15,8 @@ import Analatics from "./components/analatics/Analatics";
 import Sales from "./pages/sales/Sales";
 import Reports from "./pages/report/Reports";
 import OrderDetails from "./pages/Orders/OrderDetails/OrderDetails";
+import NewProduct from "./pages/productList/newProduct/NewProduct";
+import Product from "./pages/productList/product/Product";
 
 function App() {
   const admin = useSelector((state) => state.user?.currentUser?.isAdmin);

@@ -21,6 +21,7 @@ import Orders from "./pages/Orders/Orders";
 import OrderDetails from "./pages/OrderDetails/OrderDetails";
 import Analatics from "./components/analatics/Analatics";
 import Sales from "./components/sales/Sales";
+import Reports from "./pages/report/Reports";
 
 function App() {
   const admin = useSelector((state) => state.user?.currentUser?.isAdmin);
@@ -68,6 +69,9 @@ function App() {
               </Route>
               <Route path="/sales">
                 <Sales />
+              </Route>
+              <Route path="/reports">
+                <Reports />
               </Route>
             </div>
           </>

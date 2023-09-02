@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/apiCalls";
+import Loading from "../../components/loader/Loading";
 
 export default function ProductList() {
   const dispatch = useDispatch();
   const { products, isLoading } = useSelector((state) => state.product);
-  console.log(isLoading);
   useEffect(() => {
     getProducts(dispatch);
   }, [dispatch]);
@@ -62,7 +62,7 @@ export default function ProductList() {
   return (
     <div className="productList">
       {isLoading ? (
-        <h1>Loading....</h1>
+        <Loading name={"block"} />
       ) : (
         <DataGrid
           rows={products}

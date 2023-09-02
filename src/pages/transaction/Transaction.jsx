@@ -10,16 +10,22 @@ import { userRequest } from "../../requestMethods";
 import { format } from "timeago.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loading from "../../components/loader/Loading";
 
 const Transaction = () => {
   const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getOrders = async () => {
+      setIsLoading(true);
       try {
         const res = await userRequest.get("orders");
         setOrders(res.data.data);
-      } catch {}
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+      }
     };
     getOrders();
   }, []);
@@ -116,16 +122,20 @@ const Transaction = () => {
 
   return (
     <div className="transaction">
-      <DataGrid
-        rows={orders}
-        disableSelectionOnClick
-        columns={columns}
-        getRowId={(row) => row._id}
-        checkboxSelection
-        pagination
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-      />
+      {isLoading ? (
+        <Loading name={"block"} />
+      ) : (
+        <DataGrid
+          rows={orders}
+          disableSelectionOnClick
+          columns={columns}
+          getRowId={(row) => row._id}
+          checkboxSelection
+          pagination
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+        />
+      )}
     </div>
   );
 };

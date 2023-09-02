@@ -7,9 +7,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { userRequest } from "../../requestMethods";
 import { toast } from "react-toastify";
+import Loading from "../../components/loader/Loading";
 
 export default function UserList() {
   const [data, setData] = useState([]);
+  const [isLoading, setIsloading] = useState(false);
 
   const handleDelete = async (id) => {
     try {
@@ -30,11 +32,14 @@ export default function UserList() {
 
   useEffect(() => {
     const getUsers = async () => {
+      setIsloading(true);
       try {
         const res = await userRequest.get("users");
         setData(res.data.data);
+        setIsloading(false);
       } catch (error) {
         console.log(error);
+        setIsloading(false);
       }
     };
     getUsers();
@@ -95,14 +100,18 @@ export default function UserList() {
 
   return (
     <div className="userList">
-      <DataGrid
-        rows={data}
-        disableSelectionOnClick
-        getRowId={(row) => row._id}
-        columns={columns}
-        pageSize={8}
-        checkboxSelection
-      />
+      {isLoading ? (
+        <Loading name={"block"} />
+      ) : (
+        <DataGrid
+          rows={data}
+          disableSelectionOnClick
+          getRowId={(row) => row._id}
+          columns={columns}
+          pageSize={8}
+          checkboxSelection
+        />
+      )}
     </div>
   );
 }

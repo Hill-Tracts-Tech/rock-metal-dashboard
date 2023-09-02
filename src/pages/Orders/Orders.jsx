@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, orderProducts } from "../../redux/apiCalls";
+import Loading from "../../components/loader/Loading";
 
 export default function Orders() {
   const dispatch = useDispatch();
@@ -62,16 +63,17 @@ export default function Orders() {
       headerName: "Action",
       width: 150,
       renderCell: (params) => {
+        console.log(params);
         return (
           <div>
-            <Link to={`/orders/${params.row._id}`}>
+            <Link to={`/orders/${params.row.transaction_Id}`}>
               <button className="viewBtn">
                 <Visibility />
               </button>
             </Link>
             <DeleteOutline
               className="productListDelete"
-              onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDelete(params.row.transaction_Id)}
             />
           </div>
         );
@@ -82,7 +84,7 @@ export default function Orders() {
   return (
     <div className="productList">
       {isLoading ? (
-        <h1>Loading</h1>
+        <Loading name={"block"} />
       ) : (
         <DataGrid
           rows={products}

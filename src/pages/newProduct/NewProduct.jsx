@@ -9,6 +9,7 @@ import {
 import app from "../../firebase";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 export default function NewProduct() {
   const [inputs, setInputs] = useState({});
@@ -36,29 +37,23 @@ export default function NewProduct() {
     setColors(e.target.value.split(","));
   };
 
-  const product = {
-    ...inputs,
-    categories: cat,
-    size: sizes,
-    color: colors,
-  };
-
   const handleClick = (e) => {
+    if (!inputs && !file && !cat && !sizes && !colors) {
+      Swal.fire({
+        icon: "warning",
+        title: "Fill the form",
+        text: "Please complete the inputs",
+      });
+      return;
+    }
     e.preventDefault();
     const fileName = new Date().getTime() + file.name;
     const storage = getStorage(app);
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
-
-    // Register three observers:
-    // 1. 'state_changed' observer, called any time the state changes
-    // 2. Error observer, called on failure
-    // 3. Completion observer, called on successful completion
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        // Observe state change events such as progress, pause, and resume
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
@@ -76,8 +71,6 @@ export default function NewProduct() {
         console.log(error);
       },
       () => {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           const product = {
             ...inputs,
@@ -87,6 +80,12 @@ export default function NewProduct() {
             color: colors,
           };
           addProduct(product, dispatch);
+          Swal.fire({
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         });
       }
     );
@@ -141,11 +140,7 @@ export default function NewProduct() {
         </div>
         <div className="addProductItem">
           <label>Sizes</label>
-          <input
-            type="text"
-            placeholder="M,L,XL,XXL"
-            onChange={handleSizes}
-          />
+          <input type="text" placeholder="M,L,XL,XXL" onChange={handleSizes} />
         </div>
         <div className="addProductItem">
           <label>Colors</label>

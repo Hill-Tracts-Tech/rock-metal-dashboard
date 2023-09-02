@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { userRequest } from "../../requestMethods";
 import { toast } from "react-toastify";
 import Loading from "../../components/loader/Loading";
+import Swal from "sweetalert2";
 
 export default function UserList() {
   const [data, setData] = useState([]);
@@ -15,14 +16,22 @@ export default function UserList() {
 
   const handleDelete = async (id) => {
     try {
-      await userRequest.delete(`/users/${id}`);
-      setData((prevData) => prevData.filter((user) => user._id !== id));
-      toast.success("User deleted successfully!", {
-        position: "top-right",
-        autoClose: 3000,
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3bb077",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await userRequest.delete(`/users/${id}`);
+          setData((prevData) => prevData.filter((user) => user._id !== id));
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        }
       });
     } catch (error) {
-      console.log(error);
       toast.error("Error deleting user. Please try again later.", {
         position: "top-right",
         autoClose: 3000,

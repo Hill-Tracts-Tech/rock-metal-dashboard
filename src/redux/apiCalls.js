@@ -26,7 +26,6 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res.data.data));
-    alert("Logged in Successfully");
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(loginFailure(errorMessage));
@@ -99,7 +98,6 @@ export const addProduct = async (product, dispatch) => {
   try {
     const res = await userRequest.post(`/products`, product);
     dispatch(addProductSuccess(res.data.data));
-    alert("Added product successfully");
   } catch (err) {
     const errorMessage = err.response?.data?.error || "An error occurred.";
     dispatch(addProductFailure(errorMessage));

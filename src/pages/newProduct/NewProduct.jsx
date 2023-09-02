@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./newProduct.css";
 import {
   getStorage,
@@ -9,6 +10,7 @@ import {
 import app from "../../firebase";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function NewProduct() {
   const [inputs, setInputs] = useState({});
@@ -34,13 +36,6 @@ export default function NewProduct() {
 
   const handleColors = (e) => {
     setColors(e.target.value.split(","));
-  };
-
-  const product = {
-    ...inputs,
-    categories: cat,
-    size: sizes,
-    color: colors,
   };
 
   const handleClick = (e) => {
@@ -87,6 +82,7 @@ export default function NewProduct() {
             color: colors,
           };
           addProduct(product, dispatch);
+          toast.success("Added Product Successfully.");
         });
       }
     );
@@ -94,6 +90,7 @@ export default function NewProduct() {
 
   return (
     <div className="newProduct">
+      <ToastContainer />
       <h1 className="addProductTitle">New Product</h1>
       <form className="addProductForm">
         <div className="addProductItem">
@@ -141,11 +138,7 @@ export default function NewProduct() {
         </div>
         <div className="addProductItem">
           <label>Sizes</label>
-          <input
-            type="text"
-            placeholder="M,L,XL,XXL"
-            onChange={handleSizes}
-          />
+          <input type="text" placeholder="M,L,XL,XXL" onChange={handleSizes} />
         </div>
         <div className="addProductItem">
           <label>Colors</label>
@@ -172,13 +165,15 @@ export default function NewProduct() {
             <option value="true">Yes</option>
           </select>
         </div>
-        <button
-          type="submit"
-          onClick={handleClick}
-          className="addProductButton"
-        >
-          Add Product
-        </button>
+        <Link to="/products">
+          <button
+            type="submit"
+            onClick={handleClick}
+            className="addProductButton"
+          >
+            Add Product
+          </button>
+        </Link>
       </form>
     </div>
   );

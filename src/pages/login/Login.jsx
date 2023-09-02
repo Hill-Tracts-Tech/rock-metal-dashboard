@@ -15,28 +15,33 @@ const Login = () => {
   return (
     <div className="l-container">
       <div className="l-wrapper">
-        <h1>Welcome to</h1>
+        <h1>Login</h1>
         <div className="l-profile">
           <img src={profile} alt="" />
         </div>
-        <span>Maliker name</span>
-        <input
-          style={{ padding: 10, marginBottom: 20 }}
-          type="email"
-          placeholder="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          style={{ padding: 10, marginBottom: 20 }}
-          type="password"
-          placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <div className="l-btn">
-          <button onClick={handleClick} style={{ padding: 10, width: 100 }}>
-            Login
-          </button>
-        </div>
+        <form className="l-form" onSubmit={handleClick}>
+          <input
+            style={{ padding: 10, marginBottom: 20 }}
+            type="email"
+            placeholder="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            style={{ padding: 10, marginBottom: 20 }}
+            type="password"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <div className="l-btn">
+            <button
+              type="submit"
+              onClick={handleClick}
+              style={{ padding: 10, width: 100 }}
+            >
+              Login
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

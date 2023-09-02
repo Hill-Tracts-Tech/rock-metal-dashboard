@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import "./topbar.css";
-import { NotificationsNone, Language, Settings } from "@material-ui/icons";
+import {
+  NotificationsNone,
+  Language,
+  Settings,
+  ExitToApp,
+} from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/userRedux";
@@ -61,8 +66,12 @@ export default function Topbar() {
               </div>
               <span>{username}</span>
               <span>{email}</span>
-              <button onClick={handleLogout} className="btn-logout">
-                Logout
+              <button
+                title="Logout"
+                onClick={handleLogout}
+                className="btn-logout"
+              >
+                <ExitToApp />
               </button>
             </div>
           </div>

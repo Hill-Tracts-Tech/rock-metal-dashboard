@@ -14,7 +14,7 @@ export default function OrderDetails() {
 
   useEffect(() => {
     orderedOnes(orderedId, dispatch);
-  }, [orderedId]);
+  }, [orderedId, dispatch]);
 
   const {
     cus_name,

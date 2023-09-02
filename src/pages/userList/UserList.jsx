@@ -1,6 +1,6 @@
 import "./userList.css";
 import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+import { DeleteOutline, Visibility } from "@material-ui/icons";
 import gravatar from "gravatar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { userRequest } from "../../requestMethods";
 import { toast } from "react-toastify";
 import Loading from "../../components/loader/Loading";
+import ErrorPage from "../../components/ErrorPage/ErrorPage";
 
 export default function UserList() {
   const [data, setData] = useState([]);
@@ -38,6 +39,7 @@ export default function UserList() {
         setData(res.data.data);
         setIsloading(false);
       } catch (error) {
+        <ErrorPage error={error} />;
         console.log(error);
         setIsloading(false);
       }
@@ -86,7 +88,9 @@ export default function UserList() {
         return (
           <>
             <Link to={"/user/" + params.row._id}>
-              <button className="userListEdit">Edit</button>
+              <button className="userListEdit">
+                <Visibility />
+              </button>
             </Link>
             <DeleteOutline
               className="userListDelete"

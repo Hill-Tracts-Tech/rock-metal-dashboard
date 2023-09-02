@@ -95,12 +95,18 @@ a {
   background-color: teal;
   border: none;
   outline: none;
-  padding: 11px 15px;
-  border-radius: 12px;
+  padding: 10px 18px;
+  border-radius: 7px;
   font-size: 18px;
   font-weight: bold;
   color: #fff;
   cursor: pointer;
+  border: 1.5px solid teal;
+  transition: ease 0.4s;
+}
+.btn-logout:hover {
+  background-color: transparent;
+  color: teal;
 }
 .overlay {
   position: fixed;

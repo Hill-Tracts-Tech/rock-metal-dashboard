@@ -48,11 +48,18 @@ export const productSlice = createSlice({
 
     updateProductSuccess: (state, action) => {
       state.isLoading = false;
+
       const updatedProductIndex = state.products.findIndex(
         (item) => item._id === action.payload.id
       );
+
       if (updatedProductIndex !== -1) {
-        state.products[updatedProductIndex] = action.payload.updatedProduct;
+        const updatedProduct = {
+          ...action.payload.updatedProduct,
+          _id: action.payload.id,
+        };
+
+        state.products[updatedProductIndex] = updatedProduct;
       }
     },
 

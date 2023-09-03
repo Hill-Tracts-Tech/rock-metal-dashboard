@@ -34,7 +34,7 @@ export default function Orders() {
   };
 
   const columns = [
-    { field: "transaction_Id", headerName: "Transition ID", width: 220 },
+    { field: "transaction_Id", headerName: "Transition ID", width: 150 },
     {
       field: "product",
       headerName: "Product",
@@ -53,7 +53,8 @@ export default function Orders() {
         );
       },
     },
-    { field: "paymentStatus", headerName: "Payment", width: 200 },
+    { field: "paymentStatus", headerName: "Payment", width: 150 },
+    { field: "shippingStatus", headerName: "Shipping Status", width: 150 },
     {
       field: "total_amount",
       headerName: "Price",

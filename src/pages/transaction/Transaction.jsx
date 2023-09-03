@@ -54,7 +54,7 @@ const Transaction = () => {
       const newPaymentStatus =
         field.paymentStatus.toLowerCase() === "pending" ? "Paid" : "Pending";
 
-      const res = await userRequest.post(`/orders/${id}`, {
+      const res = await userRequest.put(`/orders/${id}`, {
         paymentStatus: newPaymentStatus,
       });
 

@@ -43,7 +43,7 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <Link to="/" className="link">
+            <Link onClick={DrawerOpenHandler} to="/" className="link">
               <li
                 className={`sidebarListItem ${
                   location.pathname === "/" ? "active" : ""
@@ -53,7 +53,7 @@ export default function Sidebar() {
                 Home
               </li>
             </Link>
-            <Link to="/analatics" className="link">
+            <Link onClick={DrawerOpenHandler} to="/analatics" className="link">
               <li
                 className={`sidebarListItem ${
                   route.includes("analatics") ? "active" : ""
@@ -63,7 +63,7 @@ export default function Sidebar() {
                 Analytics
               </li>
             </Link>
-            <Link to="/sales" className="link">
+            <Link onClick={DrawerOpenHandler} to="/sales" className="link">
               <li
                 className={`sidebarListItem ${
                   route.includes("sales") ? "active" : ""
@@ -78,7 +78,7 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            <Link to="/users" className="link">
+            <Link onClick={DrawerOpenHandler} to="/users" className="link">
               <li
                 className={`sidebarListItem ${
                   route.includes("users") ? "active" : ""
@@ -88,7 +88,7 @@ export default function Sidebar() {
                 Users
               </li>
             </Link>
-            <Link to="/products" className="link">
+            <Link onClick={DrawerOpenHandler} to="/products" className="link">
               <li
                 className={`sidebarListItem ${
                   route.includes("products") ? "active" : ""
@@ -98,7 +98,7 @@ export default function Sidebar() {
                 Products
               </li>
             </Link>
-            <Link to="/newproduct" className="link">
+            <Link onClick={DrawerOpenHandler} to="/newproduct" className="link">
               <li
                 className={`sidebarListItem ${
                   route.includes("newproduct") ? "active" : ""
@@ -108,7 +108,7 @@ export default function Sidebar() {
                 Add Product
               </li>
             </Link>
-            <Link to="/orders" className="link">
+            <Link onClick={DrawerOpenHandler} to="/orders" className="link">
               <li
                 className={`sidebarListItem ${
                   route.includes("orders") ? "active" : ""
@@ -118,7 +118,11 @@ export default function Sidebar() {
                 Orders
               </li>
             </Link>
-            <Link to="/transaction" className="link">
+            <Link
+              onClick={DrawerOpenHandler}
+              to="/transaction"
+              className="link"
+            >
               <li
                 className={`sidebarListItem ${
                   route.includes("transaction") ? "active" : ""
@@ -128,7 +132,7 @@ export default function Sidebar() {
                 Transactions
               </li>
             </Link>
-            <Link className="link" to="/reports">
+            <Link className="link" onClick={DrawerOpenHandler} to="/reports">
               <li
                 className={`sidebarListItem ${
                   route.includes("reports") ? "active" : ""
@@ -143,7 +147,7 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Notifications</h3>
           <ul className="sidebarList">
-            <Link to="/make-admin" className="link">
+            <Link onClick={DrawerOpenHandler} to="/make-admin" className="link">
               <li
                 className={`sidebarListItem ${
                   location.pathname.includes("make-admin") ? "active" : ""
@@ -179,39 +183,10 @@ export default function Sidebar() {
             </li>
           </ul>
         </div>
-        {/* <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Staff</h3>
-          <ul className="sidebarList">
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/users" ? "" : ""
-              }`}
-            >
-              <WorkOutline className="sidebarIcon" />
-              Manage
-            </li>
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/users" ? "" : ""
-              }`}
-            >
-              <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/users" ? "" : ""
-              }`}
-            >
-              <Report className="sidebarIcon" />
-              Reports
-            </li>
-          </ul>
-        </div> */}
       </div>
-      {/* drawer */}
+      {/* Drawer */}
       {isDrawerOpen && (
-        <div className="overlay-drawer">
+        <div className="overlay-drawer" onClick={DrawerOpenHandler}>
           <div className="overlay-drawer-content">
             <div className="close" onClick={DrawerOpenHandler}>
               X
@@ -220,7 +195,7 @@ export default function Sidebar() {
               <div className="sidebarMenu">
                 <h3 className="sidebarTitle">Dashboard</h3>
                 <ul className="sidebarList">
-                  <Link to="/" className="link">
+                  <Link onClick={DrawerOpenHandler} to="/" className="link">
                     <li
                       className={`sidebarListItem ${
                         location.pathname === "/" ? "active" : ""
@@ -230,7 +205,11 @@ export default function Sidebar() {
                       Home
                     </li>
                   </Link>
-                  <Link to="/analatics" className="link">
+                  <Link
+                    onClick={DrawerOpenHandler}
+                    to="/analatics"
+                    className="link"
+                  >
                     <li
                       className={`sidebarListItem ${
                         route.includes("analatics") ? "active" : ""
@@ -240,7 +219,11 @@ export default function Sidebar() {
                       Analytics
                     </li>
                   </Link>
-                  <Link to="/sales" className="link">
+                  <Link
+                    onClick={DrawerOpenHandler}
+                    to="/sales"
+                    className="link"
+                  >
                     <li
                       className={`sidebarListItem ${
                         route.includes("sales") ? "active" : ""
@@ -255,7 +238,11 @@ export default function Sidebar() {
               <div className="sidebarMenu">
                 <h3 className="sidebarTitle">Quick Menu</h3>
                 <ul className="sidebarList">
-                  <Link to="/users" className="link">
+                  <Link
+                    onClick={DrawerOpenHandler}
+                    to="/users"
+                    className="link"
+                  >
                     <li
                       className={`sidebarListItem ${
                         route.includes("users") ? "active" : ""
@@ -265,7 +252,11 @@ export default function Sidebar() {
                       Users
                     </li>
                   </Link>
-                  <Link to="/products" className="link">
+                  <Link
+                    onClick={DrawerOpenHandler}
+                    to="/products"
+                    className="link"
+                  >
                     <li
                       className={`sidebarListItem ${
                         route.includes("products") ? "active" : ""
@@ -275,7 +266,11 @@ export default function Sidebar() {
                       Products
                     </li>
                   </Link>
-                  <Link to="/newproduct" className="link">
+                  <Link
+                    onClick={DrawerOpenHandler}
+                    to="/newproduct"
+                    className="link"
+                  >
                     <li
                       className={`sidebarListItem ${
                         route.includes("newproduct") ? "active" : ""
@@ -285,7 +280,11 @@ export default function Sidebar() {
                       Add Product
                     </li>
                   </Link>
-                  <Link to="/orders" className="link">
+                  <Link
+                    onClick={DrawerOpenHandler}
+                    to="/orders"
+                    className="link"
+                  >
                     <li
                       className={`sidebarListItem ${
                         route.includes("orders") ? "active" : ""
@@ -295,7 +294,11 @@ export default function Sidebar() {
                       Orders
                     </li>
                   </Link>
-                  <Link to="/transaction" className="link">
+                  <Link
+                    onClick={DrawerOpenHandler}
+                    to="/transaction"
+                    className="link"
+                  >
                     <li
                       className={`sidebarListItem ${
                         route.includes("transaction") ? "active" : ""
@@ -305,7 +308,11 @@ export default function Sidebar() {
                       Transactions
                     </li>
                   </Link>
-                  <Link className="link" to="/reports">
+                  <Link
+                    className="link"
+                    onClick={DrawerOpenHandler}
+                    to="/reports"
+                  >
                     <li
                       className={`sidebarListItem ${
                         route.includes("reports") ? "active" : ""
@@ -320,7 +327,11 @@ export default function Sidebar() {
               <div className="sidebarMenu">
                 <h3 className="sidebarTitle">Notifications</h3>
                 <ul className="sidebarList">
-                  <Link to="/make-admin" className="link">
+                  <Link
+                    onClick={DrawerOpenHandler}
+                    to="/make-admin"
+                    className="link"
+                  >
                     <li
                       className={`sidebarListItem ${
                         location.pathname.includes("make-admin") ? "active" : ""

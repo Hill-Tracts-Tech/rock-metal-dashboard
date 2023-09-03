@@ -17,6 +17,10 @@
   .featured {
     flex-direction: column;
   }
+  .featuredItem {
+    margin: 0;
+    padding: 26px;
+  }
 }
 
 .featuredTitle {

@@ -80,6 +80,7 @@ export default function ProductList() {
         <Loading name={"block"} />
       ) : (
         <DataGrid
+          className="data-grid"
           rows={products}
           disableSelectionOnClick
           columns={columns}

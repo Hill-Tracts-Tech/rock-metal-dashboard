@@ -7,4 +7,12 @@
 
 .chartTitle {
   margin-bottom: 20px;
+  margin-left: 15px;
+}
+@media screen and (max-width: 768px) {
+  .chart {
+    margin: 20px 0px 0px 0px;
+    padding: 0px;
+    box-shadow: none;
+  }
 }

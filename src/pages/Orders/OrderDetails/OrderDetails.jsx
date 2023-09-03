@@ -21,12 +21,10 @@ export default function OrderDetails() {
     cus_name,
     cus_phone,
     cus_postcode,
-    ship_add1,
-    ship_city,
-    shipping_method,
-    total_amount,
-    tran_id,
+    cus_add1,
+    cus_city,
     cus_email,
+    shipping_method,
   } = order?.data || {};
 
   const columns = [
@@ -89,16 +87,19 @@ export default function OrderDetails() {
             </div>
             <div>
               <h2>Shipping Details</h2>
-              <p>Address : {ship_add1}</p>
-              <p>City : {ship_city}</p>
+              <p>Address : {cus_add1}</p>
+              <p>City : {cus_city}</p>
               <p>Post Code : {cus_postcode}</p>
-              <p>Total : ৳ {total_amount}</p>
+              <p>Total : ৳ {order.total_amount}</p>
             </div>
             <div>
               <h2>Transaction Details</h2>
-              <p>Transaction ID : {tran_id?.toUpperCase()}</p>
-              <p>Total : ৳ {total_amount}</p>
-              <p>Method : {shipping_method}</p>
+              <p>Transaction ID : {order.transaction_Id?.toUpperCase()}</p>
+              <p>Total : ৳ {order.total_amount}</p>
+              <p>
+                Method :{" "}
+                {shipping_method ? shipping_method : "Cash on Delivery"}
+              </p>
               <p>
                 Shipping :{" "}
                 {shipping_method ? shipping_method : order.paymentStatus}

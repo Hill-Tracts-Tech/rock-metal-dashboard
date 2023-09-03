@@ -8,8 +8,8 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/userRedux";
 import gravatar from "gravatar";
+import { logout } from "../../pages/userList/userRedux";
 
 export default function Topbar() {
   const [isPopupProfileOpen, setIsPopupProfileOpen] = useState(false);

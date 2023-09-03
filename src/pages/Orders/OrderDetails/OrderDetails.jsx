@@ -1,20 +1,21 @@
 import { useEffect } from "react";
 import "./OrderDetails.css";
-import { orderedOnes } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { DataGrid } from "@material-ui/data-grid";
-import Loading from "../../components/loader/Loading";
+import Loading from "../../../components/loader/Loading";
+import { singelOrder } from "../serviceApi";
 
 export default function OrderDetails() {
   const location = useLocation();
   const orderedId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
-  const { order, isLoading } = useSelector((state) => state.product);
+  const { order, isLoading } = useSelector((state) => state.order);
 
   useEffect(() => {
-    orderedOnes(orderedId, dispatch);
+    singelOrder(orderedId, dispatch);
   }, [orderedId, dispatch]);
+  console.log(order);
 
   const {
     cus_name,

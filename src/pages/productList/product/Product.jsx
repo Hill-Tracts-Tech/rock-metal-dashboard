@@ -1,10 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import "./product.css";
-import Chart from "../../components/chart/Chart";
+import Chart from "../../../components/chart/Chart";
 import { Publish } from "@material-ui/icons";
 import { useEffect, useMemo, useState } from "react";
-import { userRequest } from "../../requestMethods";
-import { updateProduct } from "../../redux/apiCalls";
+import { userRequest } from "../../../requestMethods";
 import { useDispatch } from "react-redux";
 import {
   getDownloadURL,
@@ -12,8 +11,11 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import app from "../../firebase";
+import app from "../../../firebase";
 import { toast } from "react-toastify";
+import { updateProduct } from "../serviceApi";
+import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function Product() {
   const location = useLocation();
@@ -25,6 +27,8 @@ export default function Product() {
   const [sizes, setSizes] = useState([]);
   const [colors, setColors] = useState([]);
   const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const MONTHS = useMemo(
     () => [
@@ -49,7 +53,11 @@ export default function Product() {
         const res = await userRequest.get(`/products/find/${productId}`);
         setProduct(res.data.data);
       } catch (error) {
-        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
       }
     };
     getProduct();
@@ -141,6 +149,7 @@ export default function Product() {
               position: "top-right",
               autoClose: 3000,
             });
+            history.push("/products");
           });
         }
       );
@@ -156,6 +165,7 @@ export default function Product() {
         position: "top-right",
         autoClose: 3000,
       });
+      history.push("/products");
     }
   };
   return (

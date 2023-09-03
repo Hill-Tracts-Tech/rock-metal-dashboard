@@ -3,8 +3,8 @@ import { Visibility } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { userRequest } from "../../requestMethods";
 import Loading from "../loader/Loading";
+import Swal from "sweetalert2";
 import UserPopup from "../UserPopup/UserPopup";
-import ErrorPage from "../ErrorPage/ErrorPage";
 
 export default function WidgetSm() {
   const [users, setUsers] = useState([]);
@@ -26,9 +26,12 @@ export default function WidgetSm() {
         setUsers(res.data.data);
         setLoading(false);
       } catch (error) {
-        <ErrorPage error={error} onClose={null} />;
-        console.log(error);
         setLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error,
+        });
       }
     };
     getUsers();

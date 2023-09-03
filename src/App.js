@@ -18,6 +18,7 @@ import ErrorBoundary from "./utils/ErrorBoundary";
 import UserList from "../src/pages/userList/UserList";
 import User from "../src/pages/userList/user/User";
 import NewUser from "../src/pages/userList/newUser/NewUser";
+import Admins from "./pages/admin/AdminList";
 
 function App() {
   const admin = useSelector((state) => state.user?.currentUser?.isAdmin);
@@ -68,6 +69,9 @@ function App() {
                 </Route>
                 <Route path="/reports">
                   <Reports />
+                </Route>
+                <Route path="/make-admin">
+                  <Admins />
                 </Route>
               </div>
             </>

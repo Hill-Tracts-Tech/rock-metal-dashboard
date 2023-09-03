@@ -14,6 +14,7 @@ import {
   Report,
   Add,
   WebAsset,
+  PersonAdd,
 } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
 
@@ -130,9 +131,19 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Notifications</h3>
           <ul className="sidebarList">
+            <Link to="/make-admin" className="link">
+              <li
+                className={`sidebarListItem ${
+                  location.pathname.includes("make-admin") ? "active" : ""
+                }`}
+              >
+                <PersonAdd className="sidebarIcon" />
+                Admin
+              </li>
+            </Link>
             <li
               className={`sidebarListItem ${
-                location.pathname === "/users" ? "" : ""
+                location.pathname === "/mail" ? "" : ""
               }`}
             >
               <MailOutline className="sidebarIcon" />

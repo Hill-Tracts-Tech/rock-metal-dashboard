@@ -58,12 +58,10 @@ const Transaction = () => {
         paymentStatus: newPaymentStatus,
       });
 
-      // Update the orders array with the new payment status
       const updatedOrders = orders.map((order) =>
         order._id === id ? { ...order, paymentStatus: newPaymentStatus } : order
       );
 
-      // Update the state with the new orders array
       setOrders(updatedOrders);
       if (res.data) {
         handleShowToast();

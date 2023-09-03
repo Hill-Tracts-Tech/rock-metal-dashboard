@@ -1,6 +1,6 @@
 import "./userList.css";
 import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+import { DeleteOutline, Visibility } from "@material-ui/icons";
 import gravatar from "gravatar";
 import { Link } from "react-router-dom";
 import { useState } from "react";

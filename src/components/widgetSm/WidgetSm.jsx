@@ -4,10 +4,19 @@ import { useEffect, useState } from "react";
 import { userRequest } from "../../requestMethods";
 import Loading from "../loader/Loading";
 import Swal from "sweetalert2";
+import UserPopup from "../UserPopup/UserPopup";
 
 export default function WidgetSm() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const [open, setOpen] = useState(false);
+
+  const setPopup = () => {
+    setOpen(!open);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -27,6 +36,16 @@ export default function WidgetSm() {
     };
     getUsers();
   }, []);
+
+  // Function to open the UserPopup with a selected user
+  const openUserPopup = (user) => {
+    setSelectedUser(user);
+  };
+
+  // Function to close the UserPopup
+  const closeUserPopup = () => {
+    setSelectedUser(null); // Reset the selected user to null
+  };
   return (
     <div className="widgetSm">
       <span className="widgetSmTitle">New Join Members</span>
@@ -45,7 +64,10 @@ export default function WidgetSm() {
               <div className="widgetSmUser">
                 <span className="widgetSmUsername">{user?.name}</span>
               </div>
-              <button className="widgetSmButton">
+              <button
+                className="widgetSmButton"
+                onClick={() => openUserPopup(user)}
+              >
                 <Visibility className="widgetSmIcon" />
                 Display
               </button>
@@ -55,6 +77,9 @@ export default function WidgetSm() {
           <Loading margin={"20px"} name={"circle"} />
         )}
       </ul>
+      {selectedUser && (
+        <UserPopup user={selectedUser} onClose={closeUserPopup} />
+      )}
     </div>
   );
 }

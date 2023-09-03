@@ -57,7 +57,6 @@ export default function FeaturedInfo() {
 
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1;
-
   const currentMonthIncome = income.find((item) => item._id === currentMonth);
 
   return (

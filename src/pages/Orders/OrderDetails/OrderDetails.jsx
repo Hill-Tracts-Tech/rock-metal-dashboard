@@ -5,17 +5,20 @@ import { useLocation } from "react-router-dom";
 import { DataGrid } from "@material-ui/data-grid";
 import Loading from "../../../components/loader/Loading";
 import { singelOrder } from "../serviceApi";
+import { userRequest } from "../../../requestMethods";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function OrderDetails() {
+  const { order, isLoading } = useSelector((state) => state.order);
   const location = useLocation();
   const orderedId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
-  const { order, isLoading } = useSelector((state) => state.order);
+  const [shipping, setShipping] = useState(order.shippingStatus);
 
   useEffect(() => {
     singelOrder(orderedId, dispatch);
   }, [orderedId, dispatch]);
-  console.log(order);
 
   const {
     cus_name,
@@ -26,6 +29,24 @@ export default function OrderDetails() {
     cus_email,
     shipping_method,
   } = order?.data || {};
+
+  const handleShipping = async () => {
+    const newShippingStatus =
+      order.shippingStatus.toLowerCase() === "pending" ? "Shippted" : "Pending";
+
+    try {
+      await userRequest.put(`/orders/shipping/${order._id}`, {
+        shippingStatus: newShippingStatus,
+      });
+      setShipping(newShippingStatus);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error,
+      });
+    }
+  };
 
   const columns = [
     {
@@ -100,10 +121,8 @@ export default function OrderDetails() {
                 Method :{" "}
                 {shipping_method ? shipping_method : "Cash on Delivery"}
               </p>
-              <p>
-                Shipping :{" "}
-                {shipping_method ? shipping_method : order.paymentStatus}
-              </p>
+              <p>Shipping Status: {shipping}</p>
+              <button onClick={handleShipping}>Change Status</button>
             </div>
           </div>
           <div className="container" style={{ height: "400px" }}>

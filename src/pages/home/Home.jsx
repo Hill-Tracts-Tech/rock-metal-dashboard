@@ -60,7 +60,6 @@ export default function Home() {
 
   return (
     <div className="home">
-      {/* <ErrorPage /> */}
       <FeaturedInfo />
       <Chart
         data={userStats}

@@ -5,6 +5,7 @@ import profile from "../../assets/profile.png";
 import Swal from "sweetalert2";
 import { login } from "../userList/serviceApi";
 import { clear } from "../userList/userRedux";
+import Loading from "../../components/loader/Loading";
 
 const Login = () => {
   const { isLoading, error } = useSelector((state) => state.user);
@@ -53,13 +54,17 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <div className="l-btn">
-            <button
-              type="submit"
-              onClick={handleClick}
-              style={{ padding: 10, width: 100 }}
-            >
-              Login
-            </button>
+            {isLoading ? (
+              <Loading name={"block"} />
+            ) : (
+              <button
+                type="submit"
+                onClick={handleClick}
+                style={{ padding: 10, width: 100 }}
+              >
+                Login
+              </button>
+            )}
           </div>
         </form>
       </div>

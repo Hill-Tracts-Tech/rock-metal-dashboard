@@ -5,29 +5,48 @@ import { useLocation } from "react-router-dom";
 import { DataGrid } from "@material-ui/data-grid";
 import Loading from "../../../components/loader/Loading";
 import { singelOrder } from "../serviceApi";
+import { userRequest } from "../../../requestMethods";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function OrderDetails() {
+  const { order, isLoading } = useSelector((state) => state.order);
   const location = useLocation();
   const orderedId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
-  const { order, isLoading } = useSelector((state) => state.order);
+  const [shipping, setShipping] = useState(order.shippingStatus);
 
   useEffect(() => {
     singelOrder(orderedId, dispatch);
   }, [orderedId, dispatch]);
-  console.log(order);
 
   const {
     cus_name,
     cus_phone,
     cus_postcode,
-    ship_add1,
-    ship_city,
-    shipping_method,
-    total_amount,
-    tran_id,
+    cus_add1,
+    cus_city,
     cus_email,
+    shipping_method,
   } = order?.data || {};
+
+  const handleShipping = async () => {
+    const newShippingStatus =
+      order.shippingStatus.toLowerCase() === "pending" ? "Shippted" : "Pending";
+
+    try {
+      await userRequest.put(`/orders/shipping/${order._id}`, {
+        shippingStatus: newShippingStatus,
+      });
+      setShipping(newShippingStatus);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error,
+      });
+    }
+  };
 
   const columns = [
     {
@@ -89,20 +108,21 @@ export default function OrderDetails() {
             </div>
             <div>
               <h2>Shipping Details</h2>
-              <p>Address : {ship_add1}</p>
-              <p>City : {ship_city}</p>
+              <p>Address : {cus_add1}</p>
+              <p>City : {cus_city}</p>
               <p>Post Code : {cus_postcode}</p>
-              <p>Total : ৳ {total_amount}</p>
+              <p>Total : ৳ {order.total_amount}</p>
             </div>
             <div>
               <h2>Transaction Details</h2>
-              <p>Transaction ID : {tran_id?.toUpperCase()}</p>
-              <p>Total : ৳ {total_amount}</p>
-              <p>Method : {shipping_method}</p>
+              <p>Transaction ID : {order.transaction_Id?.toUpperCase()}</p>
+              <p>Total : ৳ {order.total_amount}</p>
               <p>
-                Shipping :{" "}
-                {shipping_method ? shipping_method : order.paymentStatus}
+                Method :{" "}
+                {shipping_method ? shipping_method : "Cash on Delivery"}
               </p>
+              <p>Shipping Status: {shipping}</p>
+              <button onClick={handleShipping}>Change Status</button>
             </div>
           </div>
           <div className="container" style={{ height: "400px" }}>

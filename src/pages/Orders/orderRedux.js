@@ -43,8 +43,9 @@ export const orderSlice = createSlice({
     },
     deleteOrderSuccess: (state, action) => {
       state.isLoading = false;
-      const order = state.orders.filter((item) => item._id !== action.payload);
-      state.orders = order;
+      state.orders = state.orders.filter(
+        (item) => item.transaction_Id !== action.payload
+      );
     },
     deleteOrderFailure: (state, action) => {
       state.isLoading = false;

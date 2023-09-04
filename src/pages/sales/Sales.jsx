@@ -65,7 +65,7 @@ const Sales = () => {
   );
 
   return (
-    <div className="incone">
+    <div className="income">
       {isLoading ? (
         <Loading name={"block"} />
       ) : (
@@ -74,18 +74,12 @@ const Sales = () => {
             Total Yearly Income: {totalYearlyIncome} BDT
           </h1>
 
-          <div
-            style={{
-              flex: 4,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="income-wrapper">
             <LineChart
               width={800}
               height={400}
               data={monthlyIncomeData}
+              className="line-chart"
               margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
             >
               <CartesianGrid strokeDasharray="3 3" />

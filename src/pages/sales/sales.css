@@ -1,16 +1,33 @@
-.incone {
+.income {
   flex: 4;
   margin: 20px;
   padding: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .heading {
   text-align: center;
   margin: 25px 0;
+}
+.income-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  .income-wrapper {
+    flex-direction: column;
+  }
+  .heading {
+    text-align: left;
+    margin: 13px 0;
+    font-size: 20px;
+  }
+  .line-chart {
+    width: 300px;
+    height: 350px;
+  }
 }

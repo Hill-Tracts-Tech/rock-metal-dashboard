@@ -10,14 +10,11 @@ import {
   MailOutline,
   DynamicFeed,
   ChatBubbleOutline,
-  WorkOutline,
-  Report,
   Add,
   WebAsset,
   PersonAdd,
-  KeyboardArrowRight,
+  PostAdd,
 } from "@material-ui/icons";
-import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Sidebar() {
@@ -96,6 +93,16 @@ export default function Sidebar() {
               >
                 <Add className="sidebarIcon" />
                 Add Product
+              </li>
+            </Link>
+            <Link to="/banner" className="link">
+              <li
+                className={`sidebarListItem ${
+                  route.includes("banner") ? "active" : ""
+                }`}
+              >
+                <PostAdd className="sidebarIcon" />
+                Banner
               </li>
             </Link>
             <Link to="/orders" className="link">

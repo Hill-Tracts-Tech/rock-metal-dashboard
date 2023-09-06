@@ -17,7 +17,6 @@ import Swal from "sweetalert2";
 const Sales = () => {
   const [monthlyIncomeData, setMonthlyIncomeData] = useState([]);
   const [isLoading, setIsloading] = useState(false);
-
   const MONTHS = useMemo(
     () => [
       "Jan",
@@ -64,6 +63,21 @@ const Sales = () => {
     0
   );
 
+  // Media screen size controlling
+  const [screenSize, setScreenSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <div className="income">
       {isLoading ? (
@@ -73,10 +87,9 @@ const Sales = () => {
           <h1 className="heading">
             Total Yearly Income: {totalYearlyIncome} BDT
           </h1>
-
-          <div className="income-wrapper">
+          <div>
             <LineChart
-              width={800}
+              width={screenSize.width >= 800 ? 800 : 370}
               height={400}
               data={monthlyIncomeData}
               className="line-chart"

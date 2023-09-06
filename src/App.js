@@ -19,6 +19,7 @@ import UserList from "../src/pages/userList/UserList";
 import User from "../src/pages/userList/user/User";
 import NewUser from "../src/pages/userList/newUser/NewUser";
 import Admins from "./pages/admin/AdminList";
+import AddBanner from "./pages/AddBanner/AddBanner";
 
 function App() {
   const admin = useSelector((state) => state.user?.currentUser?.isAdmin);
@@ -57,6 +58,9 @@ function App() {
                 </Route>
                 <Route path="/newproduct">
                   <NewProduct />
+                </Route>
+                <Route path="/banner">
+                  <AddBanner />
                 </Route>
                 <Route path="/transaction">
                   <Transaction />

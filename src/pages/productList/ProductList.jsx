@@ -75,7 +75,7 @@ export default function ProductList() {
   ];
 
   return (
-    <div className="productList">
+    <div className="productList" style={{ width: "100%", overflow: "auto" }}>
       {isLoading ? (
         <Loading name={"block"} />
       ) : (

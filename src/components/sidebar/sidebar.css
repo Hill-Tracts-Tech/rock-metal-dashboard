@@ -3,7 +3,11 @@
   height: calc(100vh - 50px);
   background-color: rgb(251, 251, 255);
   position: sticky;
-  width: 200px !important;
+}
+@media screen and (max-width: 768px) {
+  .sidebar {
+    flex: none;
+  }
 }
 .sidebarWrapper {
   padding: 20px;

@@ -7,7 +7,13 @@
   width: 100%;
   box-sizing: border-box;
 }
-
+.income-text {
+  text-align: center;
+}
+.income-text ul {
+  text-decoration: none;
+  list-style-type: none;
+}
 .heading {
   text-align: center;
   margin: 25px 0;
@@ -26,8 +32,12 @@
     margin: 13px 0;
     font-size: 20px;
   }
-  .line-chart {
-    width: 300px;
-    height: 350px;
+  .income {
+    flex: none;
+    margin: 0;
+    padding: 0;
+  }
+  .heading {
+    text-align: center;
   }
 }

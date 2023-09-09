@@ -122,7 +122,9 @@ export default function OrderDetails() {
                 {shipping_method ? shipping_method : "Cash on Delivery"}
               </p>
               <p>Shipping Status: {shipping}</p>
-              <button onClick={handleShipping}>Change Status</button>
+              <button className="status-btn" onClick={handleShipping}>
+                Change Status
+              </button>
             </div>
           </div>
           <div className="container" style={{ height: "400px" }}>
@@ -134,7 +136,6 @@ export default function OrderDetails() {
                 disableSelectionOnClick
                 columns={columns}
                 getRowId={(row) => row._id}
-                checkboxSelection
                 pagination
                 pageSize={10}
                 rowsPerPageOptions={[10]}

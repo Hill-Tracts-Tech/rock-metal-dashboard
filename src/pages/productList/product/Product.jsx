@@ -1,6 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./product.css";
-import Chart from "../../../components/chart/Chart";
 import { Publish } from "@material-ui/icons";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../../requestMethods";
@@ -20,7 +19,6 @@ import Swal from "sweetalert2";
 export default function Product() {
   const location = useLocation();
   const productId = location.pathname?.split("/")[2];
-  const [pStats, setPStats] = useState([]);
   const [product, setProduct] = useState({});
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState([]);
@@ -29,24 +27,6 @@ export default function Product() {
   const dispatch = useDispatch();
 
   const history = useHistory();
-
-  const MONTHS = useMemo(
-    () => [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Agu",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    []
-  );
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -62,26 +42,6 @@ export default function Product() {
     };
     getProduct();
   }, [productId]);
-
-  // useEffect(() => {
-  //   const getStats = async () => {
-  //     try {
-  //       const res = await userRequest.get("orders/income?pid=" + productId);
-  //       const list = res.data.sort((a, b) => {
-  //         return a._id - b._id;
-  //       });
-  //       list.map((item) =>
-  //         setPStats((prev) => [
-  //           ...prev,
-  //           { name: MONTHS[item._id - 1], Sales: item.total },
-  //         ])
-  //       );
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getStats();
-  // }, [productId, MONTHS]);
 
   const [updateInput, setUpdate] = useState({});
 
@@ -172,9 +132,6 @@ export default function Product() {
     <div className="product">
       <h1 className="productTitle">Update: {product.title}</h1>
       <div className="productTop">
-        <div className="productTopLeft">
-          {/* <Chart data={pStats} dataKey="Sales" title="Sales Performance" /> */}
-        </div>
         <div className="productTopRight">
           <div className="productInfoTop">
             <img

@@ -19,6 +19,7 @@ import {
   Add,
   WebAsset,
   PersonAdd,
+  PostAdd,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -196,6 +197,20 @@ export default function Topbar() {
                     >
                       <Add className="sidebarIcon" />
                       Add Product
+                    </li>
+                  </Link>
+                  <Link
+                    to="/bannerList"
+                    className="link"
+                    onClick={DrawerOpenHandler}
+                  >
+                    <li
+                      className={`sidebarListItem ${
+                        route.includes("bannerList") ? "active" : ""
+                      }`}
+                    >
+                      <PostAdd className="sidebarIcon" />
+                      Banner
                     </li>
                   </Link>
                   <Link

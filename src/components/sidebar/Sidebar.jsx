@@ -98,10 +98,10 @@ export default function Sidebar() {
             <Link to="/banner" className="link">
               <li
                 className={`sidebarListItem ${
-                  route.includes("banner") ? "active" : ""
+                  route.includes("newproduct") ? "active" : ""
                 }`}
               >
-                <PostAdd className="sidebarIcon" />
+                <PostAdd />
                 Banner
               </li>
             </Link>
@@ -150,30 +150,38 @@ export default function Sidebar() {
                 Admin
               </li>
             </Link>
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/mail" ? "" : ""
-              }`}
-            >
-              <MailOutline className="sidebarIcon" />
-              Mail
-            </li>
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/users" ? "" : ""
-              }`}
-            >
-              <DynamicFeed className="sidebarIcon" />
-              Feedback
-            </li>
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/users" ? "" : ""
-              }`}
-            >
-              <ChatBubbleOutline className="sidebarIcon" />
-              Messages
-            </li>
+            <Link to="/mail" className="link">
+              <li
+                className={`sidebarListItem ${
+                  location.pathname === "/mail" ? "" : ""
+                }`}
+              >
+                <MailOutline className="sidebarIcon" />
+                Mail
+              </li>
+            </Link>
+            <Link to="/feedback" className="link">
+              {" "}
+              <li
+                className={`sidebarListItem ${
+                  location.pathname === "/users" ? "" : ""
+                }`}
+              >
+                <DynamicFeed className="sidebarIcon" />
+                Feedback
+              </li>
+            </Link>
+            <Link to="/messages" className="link">
+              {" "}
+              <li
+                className={`sidebarListItem ${
+                  location.pathname === "/users" ? "" : ""
+                }`}
+              >
+                <ChatBubbleOutline className="sidebarIcon" />
+                Messages
+              </li>
+            </Link>
           </ul>
         </div>
       </div>

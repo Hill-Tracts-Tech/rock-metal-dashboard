@@ -63,6 +63,7 @@ export default function ProductList() {
           <>
             <Link to={"/product/" + params.row._id}>
               <button className="productListEdit">
+                Update
                 <Edit />
               </button>
             </Link>

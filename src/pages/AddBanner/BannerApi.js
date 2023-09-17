@@ -3,6 +3,7 @@ import { publicRequest, userRequest } from "../../requestMethods";
 import {
   addSliderStart,
   addSliderSuccess,
+  addSliderFailure,
   deleteSliderFailure,
   deleteSliderStart,
   deleteSliderSuccess,
@@ -11,6 +12,7 @@ import {
   getSliderSuccess,
   updateSliderStart,
   updateSliderSuccess,
+  updatedSliderFailure,
 } from "./BannerSlice";
 
 // Get all Slider
@@ -55,7 +57,7 @@ export const deleteSlider = async (id, dispatch) => {
 
 // Update Slider
 
-export const upadateSlider = async (id, slider, dispatch) => {
+export const updateSlider = async (id, slider, dispatch) => {
   try {
     dispatch(updateSliderStart());
     await userRequest.put(`/sliders/${id}`, slider);
@@ -67,7 +69,7 @@ export const upadateSlider = async (id, slider, dispatch) => {
     });
   } catch (err) {
     const errorMessage = err.response?.data?.error || "Error Occurred.";
-    dispatch(getSliderFailure(errorMessage));
+    dispatch(updatedSliderFailure(errorMessage));
     Swal.fire({
       icon: "error",
       title: "Uh...",
@@ -90,7 +92,7 @@ export const addSlider = async (slider, dispatch) => {
     });
   } catch (err) {
     const errorMessage = err.response?.data?.error || "Error Occurred.";
-    dispatch(getSliderFailure(errorMessage));
+    dispatch(addSliderFailure(errorMessage));
     Swal.fire({
       icon: "error",
       title: "Uh...",

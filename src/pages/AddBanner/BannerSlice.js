@@ -5,6 +5,7 @@ export const BannerSlide = createSlice({
   initialState: {
     isLoading: false,
     sliders: [],
+    slider: {},
     error: "",
   },
   reducers: {

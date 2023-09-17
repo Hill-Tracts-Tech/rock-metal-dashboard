@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import "./product.css";
 import { Publish } from "@material-ui/icons";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { userRequest } from "../../../requestMethods";
 import { useDispatch } from "react-redux";
 import {

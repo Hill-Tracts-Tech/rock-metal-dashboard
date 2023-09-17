@@ -22,7 +22,9 @@ import Admins from "./pages/admin/AdminList";
 import MailService from "./pages/Mail/Mail";
 import Feedback from "./pages/Feedback/Feedback";
 import Messages from "./pages/Messages/Messages";
+import BannerList from "./pages/BannerList/BannerList";
 import BannerSection from "./pages/AddBanner/BannerSection";
+import UpdateBanner from "./pages/UpdateBanner/UpdateBanner";
 
 function App() {
   const admin = useSelector((state) => state.user?.currentUser?.isAdmin);
@@ -62,7 +64,13 @@ function App() {
                 <Route path="/newproduct">
                   <NewProduct />
                 </Route>
-                <Route path="/banner">
+                <Route path="/banners">
+                  <BannerList />
+                </Route>
+                <Route path="/banner/:bannerId">
+                  <UpdateBanner />
+                </Route>
+                <Route path="/add-banner">
                   <BannerSection />
                 </Route>
                 <Route path="/transaction">

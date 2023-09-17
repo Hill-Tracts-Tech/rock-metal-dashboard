@@ -95,7 +95,7 @@ export default function Sidebar() {
                 Add Product
               </li>
             </Link>
-            <Link to="/banner" className="link">
+            <Link to="/banners" className="link">
               <li
                 className={`sidebarListItem ${
                   route.includes("newproduct") ? "active" : ""

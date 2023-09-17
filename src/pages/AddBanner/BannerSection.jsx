@@ -1,7 +1,6 @@
 import "./BannerSection.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
-import { data } from "./dammyData";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch } from "react-redux";
 import {
@@ -10,7 +9,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { addSlider, getSliders } from "./BannerApi";
+import { addSlider } from "./BannerApi";
 import app from "../../firebase";
 
 export default function BannerSection() {
@@ -19,11 +18,7 @@ export default function BannerSection() {
   const [cat, setCat] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
-  // get all slider
 
-  useEffect(() => {
-    getSliders(dispatch);
-  }, [dispatch]);
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -71,8 +66,9 @@ export default function BannerSection() {
           const slider = {
             ...inputs,
             img: downloadURL,
-            categories: cat[0],
+            cat: cat[0],
           };
+          console.log(slider);
           try {
             addSlider(slider, dispatch);
             Swal.fire({
@@ -94,28 +90,9 @@ export default function BannerSection() {
 
   return (
     <div className="whole-wrapper">
-      <div className="banner-container">
-        {/* {data.map((banner) => (
-          <div className="banner-wrapper">
-            <div className="bannerImg">
-              <img
-                src={file?.name ? URL.createObjectURL(file) : banner.img}
-                alt=""
-              />
-            </div>
-            <div className="desc">
-              <h2>{banner.title}</h2>
-              <p>{banner.category}</p>
-              <span>{banner.offer}</span>
-            </div>
-            <div className="btn">
-              <button>Update Banner</button>
-            </div>
-          </div>
-        ))} */}
-      </div>
+      <div className="banner-container"></div>
       <div className="banner-form-container">
-        <h1 className="banner-title">Update Banner</h1>
+        <h1 className="banner-title">Add New Banner</h1>
         <form>
           <div className="bannerForm">
             <div className="bannerItem">
@@ -159,6 +136,7 @@ export default function BannerSection() {
             <div className="bannerItem">
               <label>Categories</label>
               <input
+                name="cat"
                 type="text"
                 placeholder="jeans,skirts"
                 onChange={handleCat}

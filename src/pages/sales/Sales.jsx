@@ -17,7 +17,6 @@ import Swal from "sweetalert2";
 const Sales = () => {
   const [monthlyIncomeData, setMonthlyIncomeData] = useState([]);
   const [isLoading, setIsloading] = useState(false);
-
   const MONTHS = useMemo(
     () => [
       "Jan",
@@ -64,8 +63,23 @@ const Sales = () => {
     0
   );
 
+  // Media screen size controlling
+  const [screenSize, setScreenSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
-    <div className="incone">
+    <div className="income">
       {isLoading ? (
         <Loading name={"block"} />
       ) : (
@@ -73,19 +87,12 @@ const Sales = () => {
           <h1 className="heading">
             Total Yearly Income: {totalYearlyIncome} BDT
           </h1>
-
-          <div
-            style={{
-              flex: 4,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <div>
             <LineChart
-              width={800}
+              width={screenSize.width >= 800 ? 800 : 370}
               height={400}
               data={monthlyIncomeData}
+              className="line-chart"
               margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
             >
               <CartesianGrid strokeDasharray="3 3" />

@@ -39,7 +39,15 @@ export default function Chart({
           <p style={{ margin: "20px 0", textAlign: "center" }}>
             Month : Number Of Users
           </p>
-          <div style={{ display: "flex", gap: "25px" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "11px",
+              justifyContent: "center",
+              width: "100%",
+              margin: "auto",
+            }}
+          >
             {data.map((item, index) => (
               <div
                 key={index}
@@ -48,9 +56,11 @@ export default function Chart({
                 }}
               >
                 {item.active_users > 0 ? (
-                  <p>
-                    {item.name} : {item.active_users}
-                  </p>
+                  <div>
+                    <p>
+                      {item.name} : {item.active_users}
+                    </p>
+                  </div>
                 ) : (
                   <noscript />
                 )}

@@ -178,7 +178,9 @@ export default function NewProduct() {
             <label>Stock</label>
             <select name="inStock" onChange={handleChange}>
               <option value="false">No</option>
-              <option value="true">Yes</option>
+              <option selected value="true">
+                Yes
+              </option>
             </select>
           </div>
           <div className="addProductItem">

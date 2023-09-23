@@ -1,19 +1,19 @@
-import "./productList.css";
+import "./BannerList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline, Edit } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "../../components/loader/Loading";
 import Swal from "sweetalert2";
-import { deleteProduct, getProducts } from "./serviceApi";
+import { deleteSlider, getSliders } from "../AddBanner/BannerApi";
+import Loading from "../../components/loader/Loading";
 
-export default function ProductList() {
+export default function BannerList() {
   const dispatch = useDispatch();
-  const { products, isLoading } = useSelector((state) => state.product);
+  const { sliders, isLoading } = useSelector((state) => state.slider);
 
   useEffect(() => {
-    getProducts(dispatch);
+    getSliders(dispatch);
   }, [dispatch]);
 
   const handleDelete = (id) => {
@@ -27,7 +27,7 @@ export default function ProductList() {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteProduct(id, dispatch);
+        deleteSlider(id, dispatch);
         Swal.fire("Deleted!", "Your product has been deleted.", "success");
       }
     });
@@ -36,24 +36,19 @@ export default function ProductList() {
   const columns = [
     { field: "_id", headerName: "ID", width: 220 },
     {
-      field: "product",
+      field: "slider",
       headerName: "Product",
       width: 200,
       renderCell: (params) => {
         return (
-          <div className="productListItem">
-            <img className="productListImg" src={params.row.img} alt="" />
-            {params.row.title}
+          <div className="bannerListItem">
+            <img className="bannerListImg" src={params?.row?.img} alt="" />
+            {params?.row?.title}
           </div>
         );
       },
     },
-    { field: "inStock", headerName: "Stock", width: 200 },
-    {
-      field: "price",
-      headerName: "Price",
-      width: 160,
-    },
+    { field: "cat", headerName: "Category", width: 200 },
     {
       field: "action",
       headerName: "Action",
@@ -61,39 +56,48 @@ export default function ProductList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/product/" + params.row._id}>
-              <button className="productListEdit">
+            <Link to={"/banner/" + params.row._id}>
+              <button className="bannerListEdit">
                 Update
                 <Edit />
               </button>
             </Link>
             <DeleteOutline
-              className="productListDelete"
+              className="bannerListDelete"
               onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
       },
     },
+    {
+      field: "desc",
+      headerName: "Description",
+      width: 300,
+    },
   ];
 
   return (
-    <div className="productList" style={{ width: "100%", overflow: "auto" }}>
+    <div
+      className="bannerList"
+      style={{ width: "100%", overflow: "", height: "50vh" }}
+    >
+      <p className="b-title">Banners</p>
       {isLoading ? (
-        <Loading name={"block"} />
+        <Loading name="block" />
       ) : (
         <DataGrid
           className="data-grid"
-          rows={products}
+          rows={sliders}
           disableSelectionOnClick
           columns={columns}
           getRowId={(row) => row?._id}
-          checkboxSelection
-          pagination
-          pageSize={10}
           rowsPerPageOptions={[10]}
         />
       )}
+      <Link to="/add-banner">
+        <button className="add-banner-btn">Add New</button>
+      </Link>
     </div>
   );
 }

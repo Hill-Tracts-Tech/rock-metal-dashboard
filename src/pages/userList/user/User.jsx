@@ -5,6 +5,7 @@ import {
   PermIdentity,
   PhoneAndroid,
   Publish,
+  Visibility,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import "./user.css";
@@ -57,7 +58,9 @@ export default function User() {
           </div>
         </div>
         <div className="userUpdate">
-          <span className="userUpdateTitle">Edit</span>
+          <span className="userUpdateTitle">
+            <Visibility />
+          </span>
           <form className="userUpdateForm">
             <div className="userUpdateLeft">
               <div className="userUpdateItem">

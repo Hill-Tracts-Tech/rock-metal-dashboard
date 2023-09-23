@@ -10,11 +10,10 @@ import {
   MailOutline,
   DynamicFeed,
   ChatBubbleOutline,
-  WorkOutline,
-  Report,
   Add,
   WebAsset,
   PersonAdd,
+  PostAdd,
 } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
 
@@ -96,6 +95,16 @@ export default function Sidebar() {
                 Add Product
               </li>
             </Link>
+            <Link to="/banners" className="link">
+              <li
+                className={`sidebarListItem ${
+                  route.includes("newproduct") ? "active" : ""
+                }`}
+              >
+                <PostAdd />
+                Banner
+              </li>
+            </Link>
             <Link to="/orders" className="link">
               <li
                 className={`sidebarListItem ${
@@ -141,61 +150,40 @@ export default function Sidebar() {
                 Admin
               </li>
             </Link>
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/mail" ? "" : ""
-              }`}
-            >
-              <MailOutline className="sidebarIcon" />
-              Mail
-            </li>
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/users" ? "" : ""
-              }`}
-            >
-              <DynamicFeed className="sidebarIcon" />
-              Feedback
-            </li>
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/users" ? "" : ""
-              }`}
-            >
-              <ChatBubbleOutline className="sidebarIcon" />
-              Messages
-            </li>
+            <Link to="/mail" className="link">
+              <li
+                className={`sidebarListItem ${
+                  location.pathname === "/mail" ? "" : ""
+                }`}
+              >
+                <MailOutline className="sidebarIcon" />
+                Mail
+              </li>
+            </Link>
+            <Link to="/feedback" className="link">
+              {" "}
+              <li
+                className={`sidebarListItem ${
+                  location.pathname === "/users" ? "" : ""
+                }`}
+              >
+                <DynamicFeed className="sidebarIcon" />
+                Feedback
+              </li>
+            </Link>
+            <Link to="/messages" className="link">
+              {" "}
+              <li
+                className={`sidebarListItem ${
+                  location.pathname === "/users" ? "" : ""
+                }`}
+              >
+                <ChatBubbleOutline className="sidebarIcon" />
+                Messages
+              </li>
+            </Link>
           </ul>
         </div>
-        {/* <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Staff</h3>
-          <ul className="sidebarList">
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/users" ? "" : ""
-              }`}
-            >
-              <WorkOutline className="sidebarIcon" />
-              Manage
-            </li>
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/users" ? "" : ""
-              }`}
-            >
-              <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
-            <li
-              className={`sidebarListItem ${
-                location.pathname === "/users" ? "" : ""
-              }`}
-            >
-              <Report className="sidebarIcon" />
-              Reports
-            </li>
-          </ul>
-        </div> */}
       </div>
     </div>
   );

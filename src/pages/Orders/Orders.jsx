@@ -58,7 +58,7 @@ export default function Orders() {
     {
       field: "total_amount",
       headerName: "Price",
-      width: 160,
+      width: 130,
     },
     {
       field: "data.cus_name",
@@ -70,7 +70,7 @@ export default function Orders() {
     {
       field: `phone?phone:0151634445`,
       headerName: "Phone",
-      width: 160,
+      width: 130,
       valueGetter: (params) =>
         params.row.data.cus_phone ? params.row.data?.cus_phone : "01xxxxxxxxx",
     },
@@ -106,7 +106,6 @@ export default function Orders() {
           disableSelectionOnClick
           columns={columns}
           getRowId={(row) => row._id}
-          checkboxSelection
           pagination
           pageSize={10}
           rowsPerPageOptions={[10]}

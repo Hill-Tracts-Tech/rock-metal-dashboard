@@ -1,9 +1,14 @@
-.productListItem {
+.bannerListItem {
   display: flex;
   align-items: center;
 }
-
-.productListImg {
+.b-title {
+  font-size: 30px;
+  font-weight: 600;
+  color: teal;
+  margin: 17px 2px;
+}
+.bannerListImg {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -11,7 +16,7 @@
   margin-right: 10px;
 }
 
-.productListEdit {
+.bannerListEdit {
   border: none;
   border-radius: 10px;
   background-color: transparent;
@@ -22,11 +27,23 @@
   justify-content: center;
   align-items: center;
 }
-.productListEdit:hover {
+.bannerListEdit:hover {
   text-decoration: underline;
 }
 
-.productListDelete {
+.bannerListDelete {
   color: red;
   cursor: pointer;
+}
+.add-banner-btn {
+  border: none;
+  outline: none;
+  background-color: teal;
+  color: #fff;
+  font-weight: 500;
+  font-size: 19px;
+  padding: 6px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
 }

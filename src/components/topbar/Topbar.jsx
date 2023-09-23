@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import gravatar from "gravatar";
 import { logout } from "../../pages/userList/userRedux";
 import { useLocation } from "react-router-dom/cjs/react-router-dom";
+import logo from "../../assets/logo.jpeg";
 
 export default function Topbar() {
   const [isPopupProfileOpen, setIsPopupProfileOpen] = useState(false);
@@ -56,7 +57,9 @@ export default function Topbar() {
         <div className="top-bar-wrapper">
           <div className="topLeft">
             <Link to="/">
-              <span className="logo">Rock Metal</span>
+              <span className="logo">
+                <img src={logo} style={{ height: "50px" }} alt="" />
+              </span>
             </Link>
           </div>
           <div className="dropdown" onClick={DrawerOpenHandler}>

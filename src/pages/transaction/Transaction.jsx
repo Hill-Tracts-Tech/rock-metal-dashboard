@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "../../components/loader/Loading";
 import Swal from "sweetalert2";
+import { handleShowToast } from "../../utils";
 
 const Transaction = () => {
   const [orders, setOrders] = useState([]);
@@ -36,13 +37,6 @@ const Transaction = () => {
     getOrders();
   }, []);
 
-  const handleShowToast = () => {
-    toast.success("Payment Status Changed Successfully", {
-      position: "top-right",
-      autoClose: 3000,
-    });
-  };
-
   const handleEdit = async (id) => {
     try {
       const field = orders.find((order) => order._id === id);
@@ -64,7 +58,7 @@ const Transaction = () => {
 
       setOrders(updatedOrders);
       if (res.data) {
-        handleShowToast();
+        handleShowToast("Payment Status Changed Successfully");
       }
     } catch (error) {
       Swal.fire({
@@ -105,7 +99,11 @@ const Transaction = () => {
       headerName: "Amount",
       width: 160,
       renderCell: (params) => {
-        return <div className="total_amount">৳ {params.row.total_amount}</div>;
+        return (
+          <div className="total_amount">
+            ৳ {params.row.total_amount + params.row.deliveryCharge}
+          </div>
+        );
       },
     },
     {

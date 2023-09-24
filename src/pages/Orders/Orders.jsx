@@ -59,6 +59,10 @@ export default function Orders() {
       field: "total_amount",
       headerName: "Price",
       width: 130,
+      renderCell: (params) => {
+        console.log(params.row);
+        return <div>{params.row.total_amount + params.row.deliveryCharge}</div>;
+      },
     },
     {
       field: "data.cus_name",

@@ -8,13 +8,15 @@ import { singelOrder } from "../serviceApi";
 import { userRequest } from "../../../requestMethods";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { handleShowToast } from "../../../utils";
 
 export default function OrderDetails() {
   const { order, isLoading } = useSelector((state) => state.order);
   const location = useLocation();
   const orderedId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
-  const [shipping, setShipping] = useState(order.shippingStatus);
+  const [shipping, setShipping] = useState(order?.shippingStatus);
+  const [payment, setPayment] = useState(order?.paymentStatus);
 
   useEffect(() => {
     singelOrder(orderedId, dispatch);
@@ -39,6 +41,24 @@ export default function OrderDetails() {
         shippingStatus: newShippingStatus,
       });
       setShipping(newShippingStatus);
+      handleShowToast("Shipping Status Changed Successfully");
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error,
+      });
+    }
+  };
+  const handlePayment = async () => {
+    const newPaymentStatus =
+      order.paymentStatus.toLowerCase() === "pending" ? "paid" : "Pending";
+    try {
+      await userRequest.put(`/orders/${order._id}`, {
+        paymentStatus: newPaymentStatus,
+      });
+      setPayment(newPaymentStatus);
+      handleShowToast("Payment Status Changed Successfully");
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -91,6 +111,8 @@ export default function OrderDetails() {
 
   const { products } = order;
 
+  console.log(payment, "order");
+
   return (
     <div className="superContainer">
       {isLoading ? (
@@ -111,18 +133,26 @@ export default function OrderDetails() {
               <p>Address : {cus_add1}</p>
               <p>City : {cus_city}</p>
               <p>Post Code : {cus_postcode}</p>
-              <p>Total : ৳ {order.total_amount}</p>
+              <p>Total : ৳ {order.total_amount + order.deliveryCharge}</p>
+              <p>
+                Shipping Status: {shipping ? shipping : order.shippingStatus}
+              </p>
+              <button className="status-btn" onClick={handleShipping}>
+                Change Status
+              </button>
             </div>
             <div>
               <h2>Transaction Details</h2>
               <p>Transaction ID : {order.transaction_Id?.toUpperCase()}</p>
-              <p>Total : ৳ {order.total_amount}</p>
+              <p>Product Price : ৳ {order.total_amount}</p>
+              <p>Delivery Charge : ৳ {order.deliveryCharge}</p>
+              <p>Subtotal : ৳ {order.total_amount + order.deliveryCharge}</p>
               <p>
                 Method :{" "}
                 {shipping_method ? shipping_method : "Cash on Delivery"}
               </p>
-              <p>Shipping Status: {shipping}</p>
-              <button className="status-btn" onClick={handleShipping}>
+              <p>Payment Status : {payment ? payment : order.paymentStatus}</p>
+              <button className="status-btn" onClick={handlePayment}>
                 Change Status
               </button>
             </div>

@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 export const COLORS = [
   "#8884d8",
   "#82ca9d",
@@ -12,3 +14,10 @@ export const COLORS = [
   "#c45850",
   "#00CED1",
 ];
+
+export const handleShowToast = (text) => {
+  toast.success(text, {
+    position: "top-right",
+    autoClose: 3000,
+  });
+};

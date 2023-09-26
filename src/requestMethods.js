@@ -16,10 +16,12 @@ export const userRequest = axios.create({
 // Add a request interceptor
 userRequest.interceptors.request.use(
   (config) => {
-    const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
-    const currentUser = user && JSON.parse(user).currentUser;
-    const accessToken = currentUser?.accessToken;
+    // const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
+    // const currentUser = user && JSON.parse(user).currentUser;
+    // const accessToken = currentUser?.accessToken;
 
+    const accessToken = localStorage.getItem("token");
+    console.log(accessToken);
     if (accessToken) {
       config.headers["token"] = `Bearer ${accessToken}`;
     }

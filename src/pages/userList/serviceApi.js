@@ -7,6 +7,7 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/auth/login/dashboard", user);
     dispatch(loginSuccess(res.data.data));
+    localStorage.setItem("token", res.data.data?.accessToken);
     Swal.fire({
       icon: "success",
       title: "SuccessFul",

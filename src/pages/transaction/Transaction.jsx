@@ -113,7 +113,12 @@ const Transaction = () => {
       renderCell: (params) => {
         return (
           <>
-            <p style={{ marginRight: "10px" }}>{params.row.paymentStatus}</p>
+            <p
+              className={`${params.row.paymentStatus}`}
+              style={{ marginRight: "10px" }}
+            >
+              {params.row.paymentStatus === "Pending" ? "Unpaid" : "Paid"}
+            </p>
             <button
               className="productListEdit"
               onClick={() => handleEdit(params.row._id)}

@@ -83,7 +83,7 @@ const Transaction = () => {
       headerName: "Phone",
       width: 200,
       renderCell: (params) => {
-        return <div className="createdat">{params.row?.user?.name}</div>;
+        return <div className="createdat">{params.row?.user?.phone}</div>;
       },
     },
     {
@@ -113,12 +113,17 @@ const Transaction = () => {
       renderCell: (params) => {
         return (
           <>
-            <p style={{ marginRight: "10px" }}>{params.row.paymentStatus}</p>
+            <p
+              className={`${params.row.paymentStatus}`}
+              style={{ marginRight: "10px" }}
+            >
+              {params.row.paymentStatus === "Pending" ? "Unpaid" : "Paid"}
+            </p>
             <button
               className="productListEdit"
               onClick={() => handleEdit(params.row._id)}
             >
-              {params.row.paymentStatus === "Pending" ? "Paid" : "Pending"}
+              Change
             </button>
           </>
         );

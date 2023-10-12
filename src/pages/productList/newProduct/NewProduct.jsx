@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import Loading from "../../../components/loader/Loading";
 import { useHistory } from "react-router-dom";
 import { addProduct } from "../serviceApi";
+import Multiselect from "multiselect-react-dropdown";
 
 export default function NewProduct() {
   const { isLoading } = useSelector((state) => state.product);
@@ -32,15 +33,17 @@ export default function NewProduct() {
   };
 
   const handleCat = (e) => {
-    setCat(e.target.value.split(","));
+    setCat([e.target.value]);
   };
 
-  const handleSizes = (e) => {
-    setSizes(e.target.value.split(","));
+  const sizeOptions = ["S", "M", "L", "XL", "XXL", "XXXL"];
+
+  const handleSizes = (selectedList, selectedItem) => {
+    setSizes(selectedList);
   };
 
   const handleColors = (e) => {
-    setColors(e.target.value.split(","));
+    setColors([e.target.value]);
   };
 
   const handleClick = (e) => {
@@ -151,28 +154,43 @@ export default function NewProduct() {
             />
           </div>
           <div className="addProductItem">
-            <label>Categories</label>
-            <input
-              type="text"
-              placeholder="jeans,skirts"
-              onChange={handleCat}
-            />
+            <label>Category</label>
+            <select name="category" onChange={handleCat}>
+              <option value="@">Select Category</option>
+              <option selected value="shirt">
+                Shirt
+              </option>
+              <option selected value="hoodie">
+                Hoodie
+              </option>
+              <option selected value="cotton">
+                Cotton
+              </option>
+            </select>
           </div>
           <div className="addProductItem">
             <label>Sizes</label>
-            <input
-              type="text"
-              placeholder="M,L,XL,XXL"
-              onChange={handleSizes}
+            <Multiselect
+              options={sizeOptions}
+              onSelect={handleSizes}
+              onRemove={handleSizes}
+              selectedValues={sizes}
+              displayValue="Select Sizes"
+              isObject={false}
             />
           </div>
           <div className="addProductItem">
             <label>Colors</label>
-            <input
-              type="text"
-              placeholder="red,green"
-              onChange={handleColors}
-            />
+            <select name="colors" onChange={handleColors}>
+              <option value="@">Choose your color</option>
+              <option value="Black">Black</option>
+              <option value="White">White</option>
+              <option value="Green">Green</option>
+              <option value="Blue">Blue</option>
+              <option value="Red">Red</option>
+              <option value="Yellow">Yellow</option>
+              <option value="Orange">Orange</option>
+            </select>
           </div>
           <div className="addProductItem">
             <label>Stock</label>

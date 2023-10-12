@@ -6,6 +6,8 @@ import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
 
+if (process.env.REACT_APP_PRODUCTION === "YES") console.log = () => {};
+
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading="null" persistor={persistor}>

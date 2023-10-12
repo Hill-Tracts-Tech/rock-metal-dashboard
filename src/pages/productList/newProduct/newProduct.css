@@ -95,3 +95,8 @@ input {
     padding: 0;
   }
 }
+
+.searchWrapper {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
